@@ -3,10 +3,13 @@ import * as d3 from "d3";
 import {
   DONUT_COLOR_SET,
   DONUT_DATA,
+  DONUT_PADDING,
   DonutItem,
   INNER_RADIUS,
   OUTER_RADIUS,
 } from "../constants";
+
+import styles from "./Donut.module.css";
 
 export class DonutChart<IDonutChart> {
   private readonly element: SVGSVGElement | null = null;
@@ -24,25 +27,28 @@ export class DonutChart<IDonutChart> {
     }
 
     const svg = d3.select(element);
-    const g = svg.append("g");
+    const g = svg
+      .append("g")
+      .attr("class", styles.donut)
+      .attr(
+        "transform",
+        "translate(" +
+          (OUTER_RADIUS + DONUT_PADDING) +
+          "," +
+          (OUTER_RADIUS + DONUT_PADDING) +
+          ")"
+      );
 
     const colorScale = d3.scaleOrdinal().range(DONUT_COLOR_SET);
 
-    const pie = d3.pie<DonutItem>();
+    const pie = d3
+      .pie<DonutItem>()
+      .sort(null)
+      .value((d) => d.value);
 
-    const pieData = pie(
-      DONUT_DATA.map((item) => ({ ...item, valueOf: () => item.value }))
-    );
+    const pieData = pie(DONUT_DATA);
 
-    const gs = g
-      .selectAll(".g")
-      .data(pieData)
-      .enter()
-      .append("g")
-      .attr(
-        "transform",
-        "translate(" + OUTER_RADIUS + "," + OUTER_RADIUS + ")"
-      );
+    const gs = g.selectAll(".g").data(pieData).enter().append("g");
 
     gs.append("path")
       .attr("d", function (d) {

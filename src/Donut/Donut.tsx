@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import styles from "./Donut.module.css";
 import { DonutChart } from "./DonutChart";
+import { DONUT_SIZE } from "../constants";
 
 export const Donut: React.FC = () => {
   const ref = React.createRef<SVGSVGElement>();
@@ -10,8 +11,13 @@ export const Donut: React.FC = () => {
   });
 
   return (
-    <div className={styles.donut}>
-      <svg ref={ref} className={styles.svg} />
+    <div className={styles.block}>
+      <svg
+        ref={ref}
+        className={styles.svg}
+        width={DONUT_SIZE}
+        height={DONUT_SIZE}
+      />
     </div>
   );
 };

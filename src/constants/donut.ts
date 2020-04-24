@@ -50,3 +50,5 @@ export const DONUT_COLOR_SET: string[] = [
 
 export const OUTER_RADIUS = 103;
 export const INNER_RADIUS = 71;
+export const DONUT_PADDING = 60;
+export const DONUT_SIZE = OUTER_RADIUS * 2 + DONUT_PADDING * 2;
