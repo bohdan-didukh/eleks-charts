@@ -7,3 +7,10 @@
 .donut {
   margin: 6rem;
 }
+
+.total {
+  font-weight: bold;
+  text-anchor: middle;
+  display: block;
+  font-size: 1.3rem;
+}

@@ -7,6 +7,7 @@ import {
   DonutItem,
   INNER_RADIUS,
   OUTER_RADIUS,
+  TOTAL_FONT_HEIGHT,
 } from "../constants";
 
 import styles from "./Donut.module.css";
@@ -17,6 +18,14 @@ export class DonutChart<IDonutChart> {
   constructor(element: SVGSVGElement) {
     this.element = element;
     this.render();
+  }
+
+  get total(): number {
+    return (
+      Math.round(
+        DONUT_DATA.reduce((total, { value }) => total + value, 0) * 10
+      ) / 10
+    );
   }
 
   render() {
@@ -59,5 +68,16 @@ export class DonutChart<IDonutChart> {
       .attr("fill", ({ data }) => {
         return colorScale(data.title);
       });
+
+    // draw total top text
+    g.append("text")
+      .attr("class", styles.total)
+      .text(`EUR ${this.total} billion`);
+
+    // draw total bottom text
+    g.append("text")
+      .attr("class", styles.total)
+      .attr("transform", `translate(0, ${TOTAL_FONT_HEIGHT})`)
+      .text("total");
   }
 }
