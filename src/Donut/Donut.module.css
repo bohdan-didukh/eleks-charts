@@ -15,3 +15,13 @@
   font-size: 1.3rem;
   align-items: center;
 }
+
+.line {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.4rem;
+}

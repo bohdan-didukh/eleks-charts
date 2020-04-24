@@ -56,20 +56,21 @@ export class DonutChart<IDonutChart> {
       .value((d) => d.value);
 
     const pieData = pie(DONUT_DATA);
+    const arc = d3.arc().innerRadius(INNER_RADIUS).outerRadius(OUTER_RADIUS);
 
     const gs = g.selectAll(".g").data(pieData).enter().append("g");
 
     gs.append("path")
       .attr("d", function (d) {
         // @ts-ignore
-        return d3.arc().innerRadius(INNER_RADIUS).outerRadius(OUTER_RADIUS)(d);
+        return arc(d);
       })
       // @ts-ignore
       .attr("fill", ({ data }) => {
         return colorScale(data.title);
       });
 
-    // draw total top text
+    // lines
     g.append("text")
       .attr("class", styles.total)
       .text(`EUR ${this.total} billion`);
@@ -79,5 +80,49 @@ export class DonutChart<IDonutChart> {
       .attr("class", styles.total)
       .attr("transform", `translate(0, ${TOTAL_FONT_HEIGHT})`)
       .text("total");
+
+    // draw piece lines
+    gs.append("line")
+      .attr("class", styles.line)
+      .attr("dy", ".35.em")
+      .attr("x1", (d) => {
+        // @ts-ignore
+        return arc.centroid(d)[0] * 1.5;
+      })
+      .attr("y1", (d) => {
+        // @ts-ignore
+        return arc.centroid(d)[1] * 1.5;
+      })
+      .attr("x2", (d) => {
+        // @ts-ignore
+        return arc.centroid(d)[0] * 1.22;
+      })
+      .attr("y2", (d) => {
+        // @ts-ignore
+        return arc.centroid(d)[1] * 1.22;
+      });
+
+    // draw label
+    gs.append("text")
+      .attr("transform", (d) => {
+        // @ts-ignore
+        const [x, y] = arc.centroid(d);
+        return "translate(" + [x * 1.7, y * 1.7] + ")";
+      })
+      .attr("text-anchor", (d) => {
+        // @ts-ignore
+        const [x] = arc.centroid(d);
+
+        console.log("x is:", x);
+        if (Math.abs(x) < INNER_RADIUS / 2) {
+          return "start";
+        }
+        if (x > 0) {
+          return "start";
+        }
+        return "end";
+      })
+      .attr("class", styles.title)
+      .text((d) => d.data.title);
   }
 }
