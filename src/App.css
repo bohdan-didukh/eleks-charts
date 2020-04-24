@@ -2,7 +2,7 @@
 
 :root {
   --font: "Noto Sans", sans-serif;
-  --color: #000;
+  --color-base: #010202;
   --header-size: 10rem;
 }
 
@@ -10,7 +10,7 @@ body,
 html {
   font-size: 10px;
   font-family: var(--font);
-  color: var(--color);
+  color: var(--color-base);
 }
 
 header {
