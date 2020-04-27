@@ -53,3 +53,8 @@ export const INNER_RADIUS = 71;
 export const DONUT_PADDING = 180;
 export const DONUT_WIDTH = OUTER_RADIUS * 2 + DONUT_PADDING * 2;
 export const DONUT_HEIGHT = OUTER_RADIUS * 2 + DONUT_PADDING;
+
+export const DONUT_TITLE_HEIGHT = 1.2; // in em
+export const DONUT_TRANSFORM_RATIO = 0.12;
+export const DONUT_TRANSFORM_LINE_RATIO = 0.5;
+export const DONUT_TRANSFORM_LINE_SCALE_RATIO = 0.7;

@@ -5,7 +5,21 @@
 }
 
 .piece {
+  cursor: pointer;
+  pointer-events: bounding-box;
+}
+
+.piece:not(:hover) {
+  pointer-events: none;
+}
+
+.donut {
+  pointer-events: all;
+}
+
+.piecePath {
   transition: transform var(--speed);
+  pointer-events: all;
 }
 
 .total {
@@ -14,11 +28,13 @@
   display: block;
   font-size: 1.3rem;
   align-items: center;
+  /*pointer-events: none;*/
 }
 
 .line {
   fill: currentColor;
   stroke: currentColor;
+  transition: all var(--speed);
 }
 
 .title {

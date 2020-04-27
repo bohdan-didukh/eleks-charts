@@ -6,6 +6,9 @@ import {
   DONUT_COLOR_SET,
   DONUT_DATA,
   DONUT_PADDING,
+  DONUT_TRANSFORM_LINE_RATIO,
+  DONUT_TRANSFORM_LINE_SCALE_RATIO,
+  DONUT_TRANSFORM_RATIO,
   DonutItem,
   INNER_RADIUS,
   OUTER_RADIUS,
@@ -41,17 +44,17 @@ export class DonutChart<IDonutChart> {
     );
   }
 
+  colorScale = d3.scaleOrdinal().range(DONUT_COLOR_SET);
+
   percent(value: number): number {
     return Math.round((value / this.total) * 100);
   }
 
   drawPieces = () => {
-    const { g, arc } = this;
+    const { g } = this;
     if (!g) {
       return;
     }
-
-    const colorScale = d3.scaleOrdinal().range(DONUT_COLOR_SET);
 
     const pie = d3
       .pie<DonutItem>()
@@ -61,22 +64,29 @@ export class DonutChart<IDonutChart> {
     const pieData = pie(DONUT_DATA);
 
     // draw donut pieces
-    const gs = g
+    this.pieces = g
       .selectAll(".g")
       .data(pieData)
       .enter()
       .append("g")
-      .attr("class", styles.piece);
-    this.pieces = gs;
+      .attr("class", styles.piece)
+      .on("mouseover", this.onPieceOver)
 
-    gs.append("path")
+      .on("mouseout", this.disablePieces);
+  };
+
+  drawPiecePaths = () => {
+    const { arc } = this;
+    this.pieces
+      ?.append("path")
+      .attr("class", styles.piecePath)
       .attr("d", function (d) {
         // @ts-ignore
         return arc(d);
       })
       // @ts-ignore
       .attr("fill", ({ data }) => {
-        return colorScale(data.title);
+        return this.colorScale(data.title);
       });
   };
 
@@ -95,19 +105,19 @@ export class DonutChart<IDonutChart> {
       .attr("class", styles.line)
       .attr("x1", (d) => {
         // @ts-ignore
-        return arc.centroid(d)[0] * 1.5;
+        return arc.centroid(d)[0] * 1.2;
       })
       .attr("y1", (d) => {
         // @ts-ignore
-        return arc.centroid(d)[1] * 1.5;
+        return arc.centroid(d)[1] * 1.2;
       })
       .attr("x2", (d) => {
         // @ts-ignore
-        return arc.centroid(d)[0] * 1.22;
+        return arc.centroid(d)[0] * 1.5;
       })
       .attr("y2", (d) => {
         // @ts-ignore
-        return arc.centroid(d)[1] * 1.22;
+        return arc.centroid(d)[1] * 1.5;
       });
   };
 
@@ -120,7 +130,7 @@ export class DonutChart<IDonutChart> {
       .attr("transform", (d) => {
         // @ts-ignore
         const [x, y] = arc.centroid(d);
-        return "translate(" + [x * 1.7, y * 1.7] + ")";
+        return "translate(" + [x * 1.8, y * 1.8] + ")";
       })
       .attr("text-anchor", (d) => {
         // @ts-ignore
@@ -135,6 +145,39 @@ export class DonutChart<IDonutChart> {
       .attr("x", 0)
       .attr("dy", "1.2em")
       .attr("class", styles.percent);
+  };
+
+  onPieceOver = (d: PieArcDatum<DonutItem>, i: number) => {
+    const g = this.pieces?.nodes()[i];
+    if (!g) {
+      return;
+    }
+
+    this.disablePieces();
+
+    // @ts-ignore
+    const [x, y] = this.arc.centroid(d);
+
+    const el = d3.select(g);
+    const piecePath = el.select(`.${styles.piecePath}`);
+    const pieceLine = el.select(`.${styles.line}`);
+
+    piecePath.attr(
+      "transform",
+      `translate(${[x * DONUT_TRANSFORM_RATIO, y * DONUT_TRANSFORM_RATIO]})`
+    );
+    pieceLine.attr(
+      "transform",
+      `translate(${[
+        x * DONUT_TRANSFORM_LINE_RATIO,
+        y * DONUT_TRANSFORM_LINE_RATIO,
+      ]}) scale(${DONUT_TRANSFORM_LINE_SCALE_RATIO})`
+    );
+  };
+
+  disablePieces = () => {
+    this.g?.selectAll(`.${styles.piecePath}`).attr("transform", null);
+    this.g?.selectAll(`.${styles.line}`).attr("transform", null);
   };
 
   render() {
@@ -157,9 +200,10 @@ export class DonutChart<IDonutChart> {
           ")"
       );
 
-    this.drawPieces();
     this.drawTotal();
-    this.drawLines();
+    this.drawPieces();
     this.drawLabels();
+    this.drawLines();
+    this.drawPiecePaths();
   }
 }
