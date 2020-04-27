@@ -8,7 +8,7 @@ export function wrap(text: any, width: number) {
       word,
       line: string[] = [],
       lineNumber = 0,
-      lineHeight = 1.1, // ems
+      lineHeight = 1.2, // ems
       y = text.attr("y"),
       dy = 0, // parseFloat(text.attr("dy")),
       tspan = text

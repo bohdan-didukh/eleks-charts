@@ -71,16 +71,11 @@ export class DonutChart<IDonutChart> {
         return colorScale(data.title);
       });
 
-    // lines
+    // total text
     g.append("text")
       .attr("class", styles.total)
-      .text(`EUR ${this.total} billion`);
-
-    // draw total bottom text
-    g.append("text")
-      .attr("class", styles.total)
-      .attr("transform", `translate(0, ${TOTAL_FONT_HEIGHT})`)
-      .text("total");
+      .text(`EUR ${this.total} billion total`)
+      .call(wrap, 100);
 
     // draw piece lines
     gs.append("line")
