@@ -11,6 +11,7 @@ import {
 } from "../constants";
 
 import styles from "./Donut.module.css";
+import { wrap } from "../utils/wrap";
 
 export class DonutChart<IDonutChart> {
   private readonly element: SVGSVGElement | null = null;
@@ -104,6 +105,7 @@ export class DonutChart<IDonutChart> {
 
     // draw label
     gs.append("text")
+      .attr("width", 150)
       .attr("transform", (d) => {
         // @ts-ignore
         const [x, y] = arc.centroid(d);
@@ -113,16 +115,13 @@ export class DonutChart<IDonutChart> {
         // @ts-ignore
         const [x] = arc.centroid(d);
 
-        console.log("x is:", x);
-        if (Math.abs(x) < INNER_RADIUS / 2) {
-          return "start";
-        }
-        if (x > 0) {
+        if (Math.abs(x) < INNER_RADIUS / 2 || x > 0) {
           return "start";
         }
         return "end";
       })
       .attr("class", styles.title)
-      .text((d) => d.data.title);
+      .text((d) => d.data.title)
+      .call(wrap, 150);
   }
 }
