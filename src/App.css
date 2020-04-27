@@ -4,6 +4,7 @@
   --font: "Noto Sans", sans-serif;
   --color-base: #010202;
   --header-size: 10rem;
+  --speed: 0.25s;
 }
 
 body,

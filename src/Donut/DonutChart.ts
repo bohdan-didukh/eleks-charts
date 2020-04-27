@@ -7,7 +7,6 @@ import {
   DonutItem,
   INNER_RADIUS,
   OUTER_RADIUS,
-  TOTAL_FONT_HEIGHT,
 } from "../constants";
 
 import styles from "./Donut.module.css";
@@ -27,6 +26,10 @@ export class DonutChart<IDonutChart> {
         DONUT_DATA.reduce((total, { value }) => total + value, 0) * 10
       ) / 10
     );
+  }
+
+  percent(value: number): number {
+    return Math.round((value / this.total) * 100);
   }
 
   render() {
@@ -80,7 +83,6 @@ export class DonutChart<IDonutChart> {
     // draw piece lines
     gs.append("line")
       .attr("class", styles.line)
-      .attr("dy", ".35.em")
       .attr("x1", (d) => {
         // @ts-ignore
         return arc.centroid(d)[0] * 1.5;
@@ -117,6 +119,13 @@ export class DonutChart<IDonutChart> {
       })
       .attr("class", styles.title)
       .text((d) => d.data.title)
-      .call(wrap, 150);
+      .call(wrap, 150)
+      .append("tspan")
+      .text(({ value }) => {
+        return `${this.percent(value).toString()}%`;
+      })
+      .attr("x", 0)
+      .attr("dy", "1.2em")
+      .attr("class", styles.percent);
   }
 }
