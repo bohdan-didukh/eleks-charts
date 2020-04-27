@@ -4,8 +4,8 @@
   text-align: center;
 }
 
-.donut {
-  margin: 6rem;
+.piece {
+  transition: transform var(--speed);
 }
 
 .total {

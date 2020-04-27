@@ -1,5 +1,7 @@
 import * as d3 from "d3";
 
+import { Selection, PieArcDatum } from "d3";
+
 import {
   DONUT_COLOR_SET,
   DONUT_DATA,
@@ -14,10 +16,21 @@ import { wrap } from "../utils/wrap";
 
 export class DonutChart<IDonutChart> {
   private readonly element: SVGSVGElement | null = null;
+  private pieces?: Selection<
+    SVGElementTagNameMap["g"],
+    PieArcDatum<DonutItem>,
+    SVGElementTagNameMap["g"],
+    unknown
+  >;
+  private g?: Selection<SVGElementTagNameMap["g"], unknown, null, undefined>;
 
   constructor(element: SVGSVGElement) {
     this.element = element;
     this.render();
+  }
+
+  get arc() {
+    return d3.arc().innerRadius(INNER_RADIUS).outerRadius(OUTER_RADIUS);
   }
 
   get total(): number {
@@ -32,25 +45,11 @@ export class DonutChart<IDonutChart> {
     return Math.round((value / this.total) * 100);
   }
 
-  render() {
-    const { element } = this;
-
-    if (!element) {
+  drawPieces = () => {
+    const { g, arc } = this;
+    if (!g) {
       return;
     }
-
-    const svg = d3.select(element);
-    const g = svg
-      .append("g")
-      .attr("class", styles.donut)
-      .attr(
-        "transform",
-        "translate(" +
-          (OUTER_RADIUS + DONUT_PADDING) +
-          "," +
-          (OUTER_RADIUS + DONUT_PADDING) +
-          ")"
-      );
 
     const colorScale = d3.scaleOrdinal().range(DONUT_COLOR_SET);
 
@@ -60,9 +59,15 @@ export class DonutChart<IDonutChart> {
       .value((d) => d.value);
 
     const pieData = pie(DONUT_DATA);
-    const arc = d3.arc().innerRadius(INNER_RADIUS).outerRadius(OUTER_RADIUS);
 
-    const gs = g.selectAll(".g").data(pieData).enter().append("g");
+    // draw donut pieces
+    const gs = g
+      .selectAll(".g")
+      .data(pieData)
+      .enter()
+      .append("g")
+      .attr("class", styles.piece);
+    this.pieces = gs;
 
     gs.append("path")
       .attr("d", function (d) {
@@ -73,15 +78,20 @@ export class DonutChart<IDonutChart> {
       .attr("fill", ({ data }) => {
         return colorScale(data.title);
       });
+  };
 
-    // total text
-    g.append("text")
+  drawTotal = () =>
+    this.g
+      ?.append("text")
       .attr("class", styles.total)
       .text(`EUR ${this.total} billion total`)
       .call(wrap, 100);
 
+  drawLines = () => {
     // draw piece lines
-    gs.append("line")
+    const { arc } = this;
+    this.pieces
+      ?.append("line")
       .attr("class", styles.line)
       .attr("x1", (d) => {
         // @ts-ignore
@@ -99,9 +109,13 @@ export class DonutChart<IDonutChart> {
         // @ts-ignore
         return arc.centroid(d)[1] * 1.22;
       });
+  };
 
+  drawLabels = () => {
     // draw label
-    gs.append("text")
+    const { arc } = this;
+    this.pieces
+      ?.append("text")
       .attr("width", 150)
       .attr("transform", (d) => {
         // @ts-ignore
@@ -111,21 +125,41 @@ export class DonutChart<IDonutChart> {
       .attr("text-anchor", (d) => {
         // @ts-ignore
         const [x] = arc.centroid(d);
-
-        if (Math.abs(x) < INNER_RADIUS / 2 || x > 0) {
-          return "start";
-        }
-        return "end";
+        return Math.abs(x) < INNER_RADIUS / 2 || x > 0 ? "start" : "end";
       })
       .attr("class", styles.title)
       .text((d) => d.data.title)
       .call(wrap, 150)
       .append("tspan")
-      .text(({ value }) => {
-        return `${this.percent(value).toString()}%`;
-      })
+      .text(({ value }) => `${this.percent(value).toString()}%`)
       .attr("x", 0)
       .attr("dy", "1.2em")
       .attr("class", styles.percent);
+  };
+
+  render() {
+    const { element } = this;
+
+    if (!element) {
+      return;
+    }
+
+    const svg = d3.select(element);
+    this.g = svg
+      .append("g")
+      .attr("class", styles.donut)
+      .attr(
+        "transform",
+        "translate(" +
+          (OUTER_RADIUS + DONUT_PADDING) +
+          "," +
+          (OUTER_RADIUS + DONUT_PADDING / 2) +
+          ")"
+      );
+
+    this.drawPieces();
+    this.drawTotal();
+    this.drawLines();
+    this.drawLabels();
   }
 }
