@@ -6,11 +6,6 @@
 
 .piece {
   cursor: pointer;
-  pointer-events: bounding-box;
-}
-
-.piece:not(:hover) {
-  pointer-events: none;
 }
 
 .donut {
@@ -19,7 +14,7 @@
 
 .piecePath {
   transition: transform var(--speed);
-  pointer-events: all;
+  pointer-events: bounding-box;
 }
 
 .total {
@@ -28,7 +23,6 @@
   display: block;
   font-size: 1.3rem;
   align-items: center;
-  /*pointer-events: none;*/
 }
 
 .line {

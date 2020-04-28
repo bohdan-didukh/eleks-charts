@@ -58,3 +58,4 @@ export const DONUT_TITLE_HEIGHT = 1.2; // in em
 export const DONUT_TRANSFORM_RATIO = 0.12;
 export const DONUT_TRANSFORM_LINE_RATIO = 0.5;
 export const DONUT_TRANSFORM_LINE_SCALE_RATIO = 0.7;
+export const DONUT_LABEL_RATIO = 1.65;

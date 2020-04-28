@@ -5,6 +5,7 @@ import { Selection, PieArcDatum } from "d3";
 import {
   DONUT_COLOR_SET,
   DONUT_DATA,
+  DONUT_LABEL_RATIO,
   DONUT_PADDING,
   DONUT_TRANSFORM_LINE_RATIO,
   DONUT_TRANSFORM_LINE_SCALE_RATIO,
@@ -70,8 +71,6 @@ export class DonutChart<IDonutChart> {
       .enter()
       .append("g")
       .attr("class", styles.piece)
-      .on("mouseover", this.onPieceOver)
-
       .on("mouseout", this.disablePieces);
   };
 
@@ -87,7 +86,8 @@ export class DonutChart<IDonutChart> {
       // @ts-ignore
       .attr("fill", ({ data }) => {
         return this.colorScale(data.title);
-      });
+      })
+      .on("mouseover", this.onPieceOver);
   };
 
   drawTotal = () =>
@@ -105,11 +105,11 @@ export class DonutChart<IDonutChart> {
       .attr("class", styles.line)
       .attr("x1", (d) => {
         // @ts-ignore
-        return arc.centroid(d)[0] * 1.2;
+        return arc.centroid(d)[0] * 1.24;
       })
       .attr("y1", (d) => {
         // @ts-ignore
-        return arc.centroid(d)[1] * 1.2;
+        return arc.centroid(d)[1] * 1.24;
       })
       .attr("x2", (d) => {
         // @ts-ignore
@@ -129,8 +129,13 @@ export class DonutChart<IDonutChart> {
       .attr("width", 150)
       .attr("transform", (d) => {
         // @ts-ignore
-        const [x, y] = arc.centroid(d);
-        return "translate(" + [x * 1.8, y * 1.8] + ")";
+        let [x, y] = arc.centroid(d);
+        if (Math.abs(x) < INNER_RADIUS / 2) {
+          y -= 5;
+        }
+        return (
+          "translate(" + [x * DONUT_LABEL_RATIO, y * DONUT_LABEL_RATIO] + ")"
+        );
       })
       .attr("text-anchor", (d) => {
         // @ts-ignore
@@ -139,6 +144,7 @@ export class DonutChart<IDonutChart> {
       })
       .attr("class", styles.title)
       .text((d) => d.data.title)
+      .on("mouseover", this.onPieceOver)
       .call(wrap, 150)
       .append("tspan")
       .text(({ value }) => `${this.percent(value).toString()}%`)
