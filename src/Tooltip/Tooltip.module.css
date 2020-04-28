@@ -1,0 +1,12 @@
+.tooltip {
+  position: absolute;
+  background: var(--color-bg);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px var(--color-shadow);
+  transition: opacity var(--speed), visibility var(--speed);
+}
+
+.tooltip:not(.visible) {
+  opacity: 0;
+  visibility: hidden;
+}

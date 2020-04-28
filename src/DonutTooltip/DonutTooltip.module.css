@@ -1,0 +1,28 @@
+.tooltip {
+  padding: 1rem 2.5rem 1rem 1.5rem;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+  transition: background-color var(--speed);
+}
+
+.title {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+}
+
+.percent {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0.7rem;
+}
+
+.value {
+  font-size: 1.2rem;
+  opacity: 0.5;
+}

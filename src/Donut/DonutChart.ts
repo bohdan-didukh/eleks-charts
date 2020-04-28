@@ -17,6 +17,7 @@ import {
 
 import styles from "./Donut.module.css";
 import { wrap } from "../utils/wrap";
+import { Tooltip, TooltipTypes } from "../Tooltip";
 
 export class DonutChart<IDonutChart> {
   private readonly element: SVGSVGElement | null = null;
@@ -26,6 +27,8 @@ export class DonutChart<IDonutChart> {
     SVGElementTagNameMap["g"],
     unknown
   >;
+
+  private tooltip: Tooltip = new Tooltip();
   private g?: Selection<SVGElementTagNameMap["g"], unknown, null, undefined>;
 
   constructor(element: SVGSVGElement) {
@@ -179,11 +182,23 @@ export class DonutChart<IDonutChart> {
         y * DONUT_TRANSFORM_LINE_RATIO,
       ]}) scale(${DONUT_TRANSFORM_LINE_SCALE_RATIO})`
     );
+
+    this.tooltip.set({
+      visible: true,
+      type: TooltipTypes.donut,
+      data: {
+        color: this.colorScale(d.data.title) as string,
+        title: d.data.title,
+        percent: this.percent(d.value),
+        value: d.value,
+      },
+    });
   };
 
   disablePieces = () => {
     this.g?.selectAll(`.${styles.piecePath}`).attr("transform", null);
     this.g?.selectAll(`.${styles.line}`).attr("transform", null);
+    this.tooltip.hide();
   };
 
   render() {
