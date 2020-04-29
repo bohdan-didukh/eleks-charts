@@ -9,12 +9,13 @@ export function wrap(text: any, width: number) {
       word,
       line: string[] = [],
       lineNumber = 0,
-      y = text.attr("y"),
-      dy = 0, // parseFloat(text.attr("dy")),
+      x = text.attr("x") || 0,
+      y = text.attr("y") || 0,
+      dy = parseFloat(text.attr("dy")) || 0,
       tspan = text
         .text(null)
         .append("tspan")
-        .attr("x", 0)
+        .attr("x", x)
         .attr("y", y)
         .attr("dy", dy + "em");
     while ((word = words.pop())) {
@@ -27,7 +28,7 @@ export function wrap(text: any, width: number) {
         line = [word];
         tspan = text
           .append("tspan")
-          .attr("x", 0)
+          .attr("x", x)
           .attr("y", y)
           .attr("dy", ++lineNumber * DONUT_TITLE_HEIGHT + dy + "em")
           .text(word);

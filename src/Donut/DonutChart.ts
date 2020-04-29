@@ -13,9 +13,10 @@ import {
   DonutItem,
   INNER_RADIUS,
   OUTER_RADIUS,
+  SPEED,
 } from "../constants";
 
-import styles from "./Donut.module.css";
+import styles from "./Donut.module.scss";
 import { wrap } from "../utils/wrap";
 import { Tooltip, TooltipTypes } from "../Tooltip";
 
@@ -34,6 +35,7 @@ export class DonutChart<IDonutChart> {
   constructor(element: SVGSVGElement) {
     this.element = element;
     this.render();
+    this.animation();
   }
 
   get arc() {
@@ -127,18 +129,22 @@ export class DonutChart<IDonutChart> {
   drawLabels = () => {
     // draw label
     const { arc } = this;
+
     this.pieces
       ?.append("text")
       .attr("width", 150)
-      .attr("transform", (d) => {
+      .attr("x", (d) => {
+        // @ts-ignore
+        let [x] = arc.centroid(d);
+        return x * DONUT_LABEL_RATIO;
+      })
+      .attr("y", (d) => {
         // @ts-ignore
         let [x, y] = arc.centroid(d);
         if (Math.abs(x) < INNER_RADIUS / 2) {
           y -= 5;
         }
-        return (
-          "translate(" + [x * DONUT_LABEL_RATIO, y * DONUT_LABEL_RATIO] + ")"
-        );
+        return y * DONUT_LABEL_RATIO;
       })
       .attr("text-anchor", (d) => {
         // @ts-ignore
@@ -151,7 +157,11 @@ export class DonutChart<IDonutChart> {
       .call(wrap, 150)
       .append("tspan")
       .text(({ value }) => `${this.percent(value).toString()}%`)
-      .attr("x", 0)
+      .attr("x", function (d) {
+        // @ts-ignore
+        let [x] = arc.centroid(d);
+        return x * DONUT_LABEL_RATIO;
+      })
       .attr("dy", "1.2em")
       .attr("class", styles.percent);
   };
@@ -195,6 +205,22 @@ export class DonutChart<IDonutChart> {
     });
   };
 
+  animation() {
+    const node = this.g?.node();
+    if (node) {
+      node.classList.add(styles.hidden);
+      node.classList.add(styles.delay);
+      setTimeout(() => {
+        // show labels
+        node.classList.remove(styles.hidden);
+
+        setTimeout(() => {
+          node.classList.remove(styles.delay);
+        }, SPEED * 4);
+      }, SPEED * 4);
+    }
+  }
+
   disablePieces = () => {
     this.g?.selectAll(`.${styles.piecePath}`).attr("transform", null);
     this.g?.selectAll(`.${styles.line}`).attr("transform", null);
@@ -211,7 +237,7 @@ export class DonutChart<IDonutChart> {
     const svg = d3.select(element);
     this.g = svg
       .append("g")
-      .attr("class", styles.donut)
+      .attr("class", `${styles.donut}`)
       .attr(
         "transform",
         "translate(" +

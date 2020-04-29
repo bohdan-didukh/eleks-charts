@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import styles from "./Donut.module.css";
+import styles from "./Donut.module.scss";
 import { DonutChart } from "./DonutChart";
 import { DONUT_HEIGHT, DONUT_WIDTH } from "../constants";
 

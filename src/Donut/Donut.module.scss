@@ -1,0 +1,113 @@
+.block {
+  margin: 5rem auto;
+  align-items: center;
+  text-align: center;
+}
+
+.piece {
+  cursor: pointer;
+}
+
+.donut {
+  pointer-events: all;
+}
+
+.piecePath {
+  transition: transform var(--speed), fill calc(var(--speed) * 2);
+  pointer-events: bounding-box;
+}
+
+.total {
+  font-weight: bold;
+  text-anchor: middle;
+  display: block;
+  font-size: 1.3rem;
+  align-items: center;
+  transition: all var(--speed);
+}
+
+.line {
+  fill: currentColor;
+  stroke: currentColor;
+  transition: all var(--speed);
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 1.2em;
+  transition: all var(--speed);
+}
+
+.percent {
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+/*animation*/
+.hidden {
+  & .total,
+  & .line,
+  & .title {
+    opacity: 0;
+    visibility: hidden;
+    transition: none;
+  }
+
+  & .title {
+    transform: scale(0.8);
+  }
+
+  & .line {
+    transform: scale(0.8);
+  }
+
+  & .piecePath {
+    //fill: var(--gray) !important;
+    animation: circle-in calc(var(--speed) * 4);
+  }
+}
+
+.donut:not(.hidden) {
+  & .total {
+    opacity: 0;
+    animation: total-in var(--speed) forwards;
+  }
+}
+
+// delay
+@for $i from 1 through 7 {
+  .delay .piece:nth-child(#{$i}) {
+    & .line,
+    & .title {
+      transition-delay: calc(var(--delay-diff) * #{$i});
+    }
+  }
+}
+
+@keyframes total-in {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes circle-in {
+  from {
+    transform: scale(0) rotate(-200deg);
+    fill: transparent;
+  }
+
+  66% {
+    fill: var(--gray);
+    transform: scale(1.05) rotate(-40deg);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
