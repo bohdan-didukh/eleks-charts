@@ -23,7 +23,7 @@ export const TooltipComponent: React.FC<ITooltipComponent> = ({
       className={`${styles.tooltip} ${visible ? styles.visible : ""}`}
       style={{ top, left: left + 20 }}
     >
-      {children}
+      <div className={styles.body}>{children}</div>
     </div>
   );
 };

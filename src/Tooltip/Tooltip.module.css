@@ -1,12 +1,32 @@
 .tooltip {
   position: absolute;
-  background: var(--color-bg);
   border-radius: 4px;
   box-shadow: 0 2px 4px var(--color-shadow);
   transition: opacity var(--speed), visibility var(--speed);
+  transform: translateY(-50%);
 }
 
 .tooltip:not(.visible) {
   opacity: 0;
   visibility: hidden;
+}
+
+.tooltip::before {
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  background-color: var(--color-bg);
+  box-shadow: 0 0 4px var(--color-shadow);
+  left: -0.5rem;
+  top: calc(50% - 0.5rem);
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.body {
+  z-index: 2;
+  background: var(--color-bg);
+  position: relative;
 }
