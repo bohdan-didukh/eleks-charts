@@ -12,7 +12,6 @@ const handleMove = ({
 function App() {
   return (
     <div className="App" onMouseMove={handleMove}>
-      <header className="App-header">Eleks Charts</header>
       <Donut />
     </div>
   );

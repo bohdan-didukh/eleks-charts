@@ -5,7 +5,6 @@
   --color-base: #010202;
   --color-bg: #ffffff;
   --color-shadow: rgba(0, 0, 0, 0.5);
-  --header-size: 10rem;
 
   /*transition*/
   --speed: 0.28s;
@@ -21,11 +20,4 @@ html {
   font-family: var(--font);
   color: var(--color-base);
   background: var(--font);
-}
-
-header {
-  height: var(--header-size);
-  text-align: center;
-  line-height: var(--header-size);
-  font-size: 4rem;
 }
