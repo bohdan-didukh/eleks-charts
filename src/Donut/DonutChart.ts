@@ -12,13 +12,17 @@ import {
   DONUT_TRANSFORM_RATIO,
   DonutItem,
   INNER_RADIUS,
+  LOADER_RADIUS,
+  LOADER_STROKE_WIDTH,
   OUTER_RADIUS,
-  SPEED,
+  SPEED_DOUBLE,
+  SPEED_QUAD,
 } from "../constants";
 
 import styles from "./Donut.module.scss";
 import { wrap } from "../utils/wrap";
 import { Tooltip, TooltipTypes } from "../Tooltip";
+import { animateCircle, describeArc } from "./helpers";
 
 export class DonutChart<IDonutChart> {
   private readonly element: SVGSVGElement | null = null;
@@ -31,6 +35,12 @@ export class DonutChart<IDonutChart> {
 
   private tooltip: Tooltip = new Tooltip();
   private g?: Selection<SVGElementTagNameMap["g"], unknown, null, undefined>;
+  private loader?: Selection<
+    SVGElementTagNameMap["path"],
+    unknown,
+    null,
+    undefined
+  >;
 
   constructor(element: SVGSVGElement) {
     this.element = element;
@@ -56,11 +66,22 @@ export class DonutChart<IDonutChart> {
     return Math.round((value / this.total) * 100);
   }
 
+  drawLoader = (endAngle = 0, stroke = LOADER_STROKE_WIDTH) => {
+    const { g, loader } = this;
+
+    if (!g) return;
+
+    if (!loader) {
+      this.loader = g.append("path").attr("class", styles.loader);
+    }
+    this.loader
+      ?.attr("stroke-width", stroke)
+      .attr("d", describeArc(LOADER_RADIUS, 0, endAngle));
+  };
+
   drawPieces = () => {
     const { g } = this;
-    if (!g) {
-      return;
-    }
+    if (!g) return;
 
     const pie = d3
       .pie<DonutItem>()
@@ -99,7 +120,7 @@ export class DonutChart<IDonutChart> {
     this.g
       ?.append("text")
       .attr("class", styles.total)
-      .text(`EUR ${this.total} billion total`)
+      .text(`EIB signed €${this.total} total`)
       .call(wrap, 100);
 
   drawLines = () => {
@@ -146,6 +167,7 @@ export class DonutChart<IDonutChart> {
         }
         return y * DONUT_LABEL_RATIO;
       })
+      .attr("dy", ".6em")
       .attr("text-anchor", (d) => {
         // @ts-ignore
         const [x] = arc.centroid(d);
@@ -154,16 +176,33 @@ export class DonutChart<IDonutChart> {
       .attr("class", styles.title)
       .text((d) => d.data.title)
       .on("mouseover", this.onPieceOver)
-      .call(wrap, 150)
-      .append("tspan")
-      .text(({ value }) => `${this.percent(value).toString()}%`)
+      .call(wrap, 150);
+  };
+
+  drawValues = () => {
+    const { arc } = this;
+    this.pieces
+      ?.append("text")
+      .text(({ value }) => `€${value}`)
+      .attr("text-anchor", (d) => {
+        // @ts-ignore
+        const [x] = arc.centroid(d);
+        return Math.abs(x) < INNER_RADIUS / 2 || x > 0 ? "start" : "end";
+      })
       .attr("x", function (d) {
         // @ts-ignore
         let [x] = arc.centroid(d);
         return x * DONUT_LABEL_RATIO;
       })
-      .attr("dy", "1.2em")
-      .attr("class", styles.percent);
+      .attr("y", (d) => {
+        // @ts-ignore
+        let [x, y] = arc.centroid(d);
+        if (Math.abs(x) < INNER_RADIUS / 2) {
+          y -= 5;
+        }
+        return y * DONUT_LABEL_RATIO - 10;
+      })
+      .attr("class", styles.value);
   };
 
   onPieceOver = (d: PieArcDatum<DonutItem>, i: number) => {
@@ -205,27 +244,32 @@ export class DonutChart<IDonutChart> {
     });
   };
 
-  animation() {
-    const node = this.g?.node();
-    if (node) {
-      node.classList.add(styles.hidden);
-      node.classList.add(styles.delay);
-      setTimeout(() => {
-        // show labels
-        node.classList.remove(styles.hidden);
-
-        setTimeout(() => {
-          node.classList.remove(styles.delay);
-        }, SPEED * 4);
-      }, SPEED * 4);
-    }
-  }
-
   disablePieces = () => {
     this.g?.selectAll(`.${styles.piecePath}`).attr("transform", null);
     this.g?.selectAll(`.${styles.line}`).attr("transform", null);
     this.tooltip.hide();
   };
+
+  animation() {
+    const node = this.g?.node();
+    if (node) {
+      node.classList.add(styles.hidden);
+
+      setTimeout(async () => {
+        await animateCircle(this.drawLoader);
+        node.classList.add(styles.showPieces);
+
+        setTimeout(() => {
+          node.classList.add(styles.delay);
+          node.classList.remove(styles.hidden);
+
+          setTimeout(() => {
+            node.classList.remove(styles.delay);
+          }, SPEED_QUAD);
+        }, SPEED_DOUBLE);
+      }, 0);
+    }
+  }
 
   render() {
     const { element } = this;
@@ -247,9 +291,11 @@ export class DonutChart<IDonutChart> {
           ")"
       );
 
+    this.drawLoader();
     this.drawTotal();
     this.drawPieces();
     this.drawLabels();
+    this.drawValues();
     this.drawLines();
     this.drawPiecePaths();
   }

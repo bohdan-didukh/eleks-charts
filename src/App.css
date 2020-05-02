@@ -8,10 +8,12 @@
 
   /*transition*/
   --speed: 0.28s;
+  --speed-double: calc(var(--speed) * 2);
   --delay-diff: 0.05s;
 
   /*colors from the colors.ts*/
   --gray: #cacaca;
+  --blue-dark: #02529e;
 }
 
 body,

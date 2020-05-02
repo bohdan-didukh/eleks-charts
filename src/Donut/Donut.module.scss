@@ -13,15 +13,16 @@
 }
 
 .piecePath {
-  transition: transform var(--speed), fill calc(var(--speed) * 2);
+  transition: transform var(--speed), fill var(--speed-double);
   pointer-events: bounding-box;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .total {
-  font-weight: bold;
   text-anchor: middle;
   display: block;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   align-items: center;
   transition: all var(--speed);
 }
@@ -29,85 +30,92 @@
 .line {
   fill: currentColor;
   stroke: currentColor;
-  transition: all var(--speed);
 }
 
 .title {
   font-weight: bold;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   line-height: 1.2em;
+}
+
+.value {
+  font-size: 1.7rem;
+  font-weight: bold;
+  line-height: 1.2em;
+}
+
+.line,
+.title,
+.value {
   transition: all var(--speed);
 }
 
-.percent {
-  font-size: 1.2rem;
-  font-weight: normal;
+.loader {
+  fill: none;
+  stroke: var(--gray);
+  stroke-linecap: round;
+  transform: scale(0.7);
 }
 
 /*animation*/
 .hidden {
   & .total,
   & .line,
-  & .title {
+  & .title,
+  & .value {
     opacity: 0;
     visibility: hidden;
     transition: none;
   }
 
-  & .title {
-    transform: scale(0.8);
-  }
-
+  & .title,
+  & .value,
   & .line {
     transform: scale(0.8);
   }
 
-  & .piecePath {
-    //fill: var(--gray) !important;
-    animation: circle-in calc(var(--speed) * 4);
+  & .loader {
+    transform: scale(0.7);
+    transition: transform var(--speed-double);
+  }
+
+  & .total {
+    opacity: 0;
+    transform: scale(0.5);
   }
 }
 
-.donut:not(.hidden) {
-  & .total {
-    opacity: 0;
-    animation: total-in var(--speed) forwards;
+.donut.showPieces {
+  & .loader {
+    display: none;
+  }
+  & .piecePath {
+    opacity: 1;
+    visibility: visible;
+    animation: circle-in var(--speed-double) ease-in-out;
   }
 }
 
 // delay
-@for $i from 1 through 7 {
+@for $i from 1 through 8 {
   .delay .piece:nth-child(#{$i}) {
     & .line,
+    & .value,
     & .title {
       transition-delay: calc(var(--delay-diff) * #{$i});
     }
   }
 }
 
-@keyframes total-in {
+@keyframes circle-in {
   from {
-    opacity: 0;
-    transform: scale(0.5);
+    opacity: 1;
+    transform: scale(0.7) rotate(-200deg);
+    fill: var(--gray);
   }
 
   to {
     opacity: 1;
-  }
-}
-
-@keyframes circle-in {
-  from {
-    transform: scale(0) rotate(-200deg);
-    fill: transparent;
-  }
-
-  66% {
-    fill: var(--gray);
-    transform: scale(1.05) rotate(-40deg);
-  }
-
-  to {
-    transform: scale(1);
+    transform: scale(1) rotate(-1deg);
   }
 }
