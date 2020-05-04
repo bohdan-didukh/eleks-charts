@@ -15,8 +15,6 @@
 .piecePath {
   transition: transform var(--speed), fill var(--speed-double);
   pointer-events: bounding-box;
-  opacity: 0;
-  visibility: hidden;
 }
 
 .total {
@@ -55,6 +53,8 @@
   stroke: var(--gray);
   stroke-linecap: round;
   transform: scale(0.7);
+  opacity: 0;
+  visibility: hidden;
 }
 
 /*animation*/
@@ -77,11 +77,18 @@
   & .loader {
     transform: scale(0.7);
     transition: transform var(--speed-double);
+    opacity: 1;
+    visibility: visible;
   }
 
   & .total {
     opacity: 0;
     transform: scale(0.5);
+  }
+
+  & .piecePath {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 

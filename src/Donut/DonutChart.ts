@@ -118,8 +118,9 @@ export class DonutChart<IDonutChart> {
 
   drawTotal = () =>
     this.g
-      ?.append("text")
+      ?.append("g")
       .attr("class", styles.total)
+      .append("text")
       .text(`EIB signed €${this.total} total`)
       .call(wrap, 100);
 
@@ -152,7 +153,9 @@ export class DonutChart<IDonutChart> {
     const { arc } = this;
 
     this.pieces
-      ?.append("text")
+      ?.append("g")
+      .attr("class", styles.title)
+      .append("text")
       .attr("width", 150)
       .attr("x", (d) => {
         // @ts-ignore
@@ -173,7 +176,7 @@ export class DonutChart<IDonutChart> {
         const [x] = arc.centroid(d);
         return Math.abs(x) < INNER_RADIUS / 2 || x > 0 ? "start" : "end";
       })
-      .attr("class", styles.title)
+
       .text((d) => d.data.title)
       .on("mouseover", this.onPieceOver)
       .call(wrap, 150);
@@ -182,7 +185,9 @@ export class DonutChart<IDonutChart> {
   drawValues = () => {
     const { arc } = this;
     this.pieces
-      ?.append("text")
+      ?.append("g")
+      .attr("class", styles.value)
+      .append("text")
       .text(({ value }) => `€${value}`)
       .attr("text-anchor", (d) => {
         // @ts-ignore
@@ -202,7 +207,7 @@ export class DonutChart<IDonutChart> {
         }
         return y * DONUT_LABEL_RATIO - 10;
       })
-      .attr("class", styles.value);
+      .call(wrap, 150);
   };
 
   onPieceOver = (d: PieArcDatum<DonutItem>, i: number) => {
@@ -221,14 +226,17 @@ export class DonutChart<IDonutChart> {
     const pieceLine = el.select(`.${styles.line}`);
 
     piecePath.attr(
-      "transform",
-      `translate(${[x * DONUT_TRANSFORM_RATIO, y * DONUT_TRANSFORM_RATIO]})`
+      "style",
+      `transform: translate(${[
+        x * DONUT_TRANSFORM_RATIO + "px",
+        y * DONUT_TRANSFORM_RATIO + "px",
+      ]})`
     );
     pieceLine.attr(
-      "transform",
-      `translate(${[
-        x * DONUT_TRANSFORM_LINE_RATIO,
-        y * DONUT_TRANSFORM_LINE_RATIO,
+      "style",
+      `transform: translate(${[
+        x * DONUT_TRANSFORM_LINE_RATIO + "px",
+        y * DONUT_TRANSFORM_LINE_RATIO + "px",
       ]}) scale(${DONUT_TRANSFORM_LINE_SCALE_RATIO})`
     );
 
@@ -245,8 +253,8 @@ export class DonutChart<IDonutChart> {
   };
 
   disablePieces = () => {
-    this.g?.selectAll(`.${styles.piecePath}`).attr("transform", null);
-    this.g?.selectAll(`.${styles.line}`).attr("transform", null);
+    this.g?.selectAll(`.${styles.piecePath}`).attr("style", null);
+    this.g?.selectAll(`.${styles.line}`).attr("style", null);
     this.tooltip.hide();
   };
 
