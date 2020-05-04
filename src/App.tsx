@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { Donut } from "./Donut";
 import { Tooltip } from "./Tooltip";
+import { Bar } from "./Bar";
 const handleMove = ({
   pageX: left,
   pageY: top,
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App" onMouseMove={handleMove}>
       <Donut />
+      <Bar />
     </div>
   );
 }

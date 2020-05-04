@@ -24,7 +24,7 @@ import { wrap } from "../utils/wrap";
 import { Tooltip, TooltipTypes } from "../Tooltip";
 import { animateCircle, describeArc } from "./helpers";
 
-export class DonutChart<IDonutChart> {
+export class DonutChart {
   private readonly element: SVGSVGElement | null = null;
   private pieces?: Selection<
     SVGElementTagNameMap["g"],
