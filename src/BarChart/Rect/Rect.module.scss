@@ -1,0 +1,16 @@
+.value {
+  font-size: 1.4rem;
+  color: var(--color-base);
+  alignment-baseline: middle;
+}
+
+.name {
+  @extend .value;
+  font-weight: bold;
+  text-anchor: end;
+}
+
+.coFinanced {
+  fill: var(--orange);
+  font-size: 1.4rem;
+}
