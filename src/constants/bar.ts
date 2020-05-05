@@ -49,3 +49,5 @@ export const BAR_POSITION: IBarPosition = {
   width: BAR_WIDTH,
   height: BAR_HEIGHT,
 };
+
+export const DASHED_SIZE = 2;

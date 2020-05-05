@@ -1,3 +1,7 @@
+.rect {
+  fill: var(--blue-dark);
+}
+
 .value {
   font-size: 1.4rem;
   color: var(--color-base);
@@ -13,4 +17,16 @@
 .coFinanced {
   fill: var(--orange);
   font-size: 1.4rem;
+}
+
+.dashed {
+  //stroke: red;
+}
+
+.rectDashed {
+  fill: none;
+}
+
+.line {
+  stroke: var(--orange-light);
 }

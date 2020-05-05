@@ -1,17 +1,19 @@
 import * as d3 from "d3";
 import React, { useMemo } from "react";
 
-import { DARK_BLUE, IBarData } from "../../constants";
+import { IBarData } from "../../constants";
 import { RECT_HEIGHT } from "../../constants";
 
 import styles from "./Rect.module.scss";
+import { ScaleBand, ScaleLinear } from "d3-scale";
+import { DashedRect } from "./DashedRect";
 
 const format = d3.format(".1f");
 
 export interface IRect {
   data: IBarData;
-  x: any;
-  y: any;
+  x: ScaleLinear<number, number>;
+  y: ScaleBand<string>;
 }
 export const Rect: React.FC<IRect> = ({
   data: { value, name, coFinanced },
@@ -19,15 +21,14 @@ export const Rect: React.FC<IRect> = ({
   y,
 }) => {
   const height = Math.min(RECT_HEIGHT, y.bandwidth());
+  const width = x(value);
 
-  const percent = useMemo(() => (coFinanced / value) * 100, [
-    coFinanced,
-    value,
-  ]);
+  const percent = useMemo(() => coFinanced / value, [coFinanced, value]);
 
   return (
     <g transform={`translate(0, ${y(name)})`}>
-      <rect width={x(value)} height={height} fill={DARK_BLUE} />
+      <rect width={width} height={height} className={styles.rect} />
+      <DashedRect width={width * percent} height={height} />
       <text x={-10} y={height / 2} className={styles.name}>
         {name}
       </text>
@@ -35,7 +36,7 @@ export const Rect: React.FC<IRect> = ({
         €{format(value)}
       </text>
       <text x={5} y={-6} className={styles.coFinanced}>
-        €{format(coFinanced)} ({format(percent)}%)
+        €{format(coFinanced)} ({format(percent * 100)}%)
       </text>
     </g>
   );
