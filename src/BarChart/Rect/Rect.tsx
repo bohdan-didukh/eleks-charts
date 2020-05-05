@@ -1,9 +1,8 @@
 import * as d3 from "d3";
 import React, { useMemo } from "react";
 
-import { IBarData } from "../BarChart";
-import { DARK_BLUE } from "../../constants";
-import { RECT_HEIGHT } from "../../constants/bar";
+import { DARK_BLUE, IBarData } from "../../constants";
+import { RECT_HEIGHT } from "../../constants";
 
 import styles from "./Rect.module.scss";
 

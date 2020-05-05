@@ -3,7 +3,7 @@ import { Title } from "../Title";
 
 import styles from "./Bar.module.scss";
 import { BarChart } from "../BarChart";
-import { BAR_DATA, BAR_POSITION } from "../constants/bar";
+import { BAR_DATA, BAR_POSITION } from "../constants";
 
 export const Bar: React.FC = () => {
   return (

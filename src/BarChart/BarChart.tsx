@@ -1,31 +1,14 @@
 import React from "react";
 import * as d3 from "d3";
 import { Rect } from "./Rect";
-
-export interface IBarData {
-  value: number;
-  name: string;
-  coFinanced: number;
-}
-export interface IBarPosition {
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
-  width: number;
-  height: number;
-}
-export interface IBarChart extends IBarPosition {
-  data: IBarData[];
-}
+import { IBarChart } from "../constants";
 
 export const BarChart: React.FC<IBarChart> = (props) => {
   const { data, top, left, right, bottom, width, height } = props;
   const x = d3
     .scaleLinear()
     .range([0, width - left - right])
-    // @ts-ignore
-    .domain([0, d3.max<IBarData>(data, (d) => d.value)]);
+    .domain([0, Math.max(...data.map(({ value }) => value))]);
 
   const y = d3
     .scaleBand()

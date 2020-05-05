@@ -1,5 +1,21 @@
 import { DONUT_HEIGHT, DONUT_WIDTH } from "./donut";
-import { IBarData, IBarPosition } from "../BarChart";
+
+export interface IBarData {
+  value: number;
+  name: string;
+  coFinanced: number;
+}
+export interface IBarPosition {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+  width: number;
+  height: number;
+}
+export interface IBarChart extends IBarPosition {
+  data: IBarData[];
+}
 
 export const BAR_DATA: IBarData[] = [
   {
