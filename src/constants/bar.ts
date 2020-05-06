@@ -34,14 +34,14 @@ export const BAR_DATA: IBarData[] = [
 export const RECT_WIDTH = 10;
 
 export const VERTICAL_BAR_POSITION: IBarPosition = {
-  top: 40,
+  top: 20,
   right: 0,
-  bottom: 178,
+  bottom: 60,
   left: 0,
   width: 487,
-  height: 400,
+  height: 320,
 };
 
-export const NAME_TOP = 50;
+export const NAME_TOP = 22;
 
 export const VALUE_POSITION_INDEX = 2.5;

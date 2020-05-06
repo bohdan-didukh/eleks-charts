@@ -14,8 +14,7 @@ export const VerticalBar: React.FC = () => {
     .scaleBand()
     .range([0, width - left - right])
     .domain(data.map((d) => d.name))
-
-    .padding(0.5);
+    .padding(0.14);
 
   const lineTop = height - top - bottom;
 

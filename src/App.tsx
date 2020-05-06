@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Donut } from "./Donut";
+// import { Donut } from "./Donut";
 import { Tooltip } from "./Tooltip";
 import { VerticalBar } from "./VerticalBar";
 const handleMove = ({
@@ -15,7 +15,7 @@ function App() {
     <div className="App" onMouseMove={handleMove}>
       <main>
         <div className="charts">
-          <Donut />
+          {/*<Donut />*/}
           <VerticalBar />
         </div>
       </main>
