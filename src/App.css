@@ -32,4 +32,8 @@ h2 {
 
 .App {
   padding-top: 4rem;
+  text-align: center;
+}
+section {
+  padding: 2rem;
 }

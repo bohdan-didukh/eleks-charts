@@ -24,21 +24,19 @@ export const VerticalBar: React.FC = () => {
     .domain([0, Math.max(...data.map(({ value }) => value))]);
 
   return (
-    <>
-      <svg width={width} height={height}>
-        <g transform={`translate(${left}, ${top})`}>
-          {data.map((data) => (
-            <Rect key={data.name} data={data} x={x} y={y} lineTop={lineTop} />
-          ))}
-        </g>
-        <line
-          x1={0}
-          x2={width}
-          y1={lineTop + top}
-          y2={lineTop + top}
-          className={styles.line}
-        />
-      </svg>
-    </>
+    <svg width={width} height={height}>
+      <g transform={`translate(${left}, ${top})`}>
+        {data.map((data) => (
+          <Rect key={data.name} data={data} x={x} y={y} lineTop={lineTop} />
+        ))}
+      </g>
+      <line
+        x1={0}
+        x2={width}
+        y1={lineTop + top}
+        y2={lineTop + top}
+        className={styles.line}
+      />
+    </svg>
   );
 };

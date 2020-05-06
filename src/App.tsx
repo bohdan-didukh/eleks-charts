@@ -14,9 +14,15 @@ const handleMove = ({
 function App() {
   return (
     <div className="App" onMouseMove={handleMove}>
-      <Donut />
-      <Bar />
-      <VerticalBar />
+      <section>
+        <Donut />
+      </section>
+      <section>
+        <VerticalBar />
+      </section>
+      <section>
+        <Bar />
+      </section>
     </div>
   );
 }
