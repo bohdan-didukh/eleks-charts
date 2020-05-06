@@ -17,6 +17,17 @@
   --blue-dark: #02529e;
   --orange: #e75c23;
   --orange-light: #f4a16b;
+
+  /*sizes*/
+  --main: 1000px;
+  --padding: 7rem;
+}
+
+@media all and(max-width: 900px) {
+  :root {
+    --main: 95%;
+    --padding: 4rem;
+  }
 }
 
 body,
@@ -31,9 +42,19 @@ h2 {
 }
 
 .App {
-  padding-top: 4rem;
   text-align: center;
 }
+
 section {
-  padding: 2rem;
+  padding: var(--padding) 0;
+}
+
+main {
+  width: var(--main);
+  margin: 0 auto;
+}
+
+.charts {
+  display: flex;
+  justify-content: space-between;
 }
