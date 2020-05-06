@@ -43,3 +43,5 @@ export const VERTICAL_BAR_POSITION: IBarPosition = {
 };
 
 export const NAME_TOP = 50;
+
+export const VALUE_POSITION_INDEX = 2.5;

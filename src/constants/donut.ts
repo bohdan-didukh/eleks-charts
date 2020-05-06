@@ -1,10 +1,10 @@
 import {
-  BLUE,
-  DARK_BLUE,
-  GRAY,
-  LIGHT_BLUE,
-  LIGHT_ORANGE,
-  ORANGE,
+  RED,
+  RED_DARK,
+  RED_LIGHT,
+  YELLOW,
+  YELLOW_DARK,
+  YELLOW_LIGHT,
 } from "./colors";
 
 export interface DonutItem {
@@ -40,12 +40,12 @@ export const DONUT_DATA: DonutItem[] = [
 ];
 
 export const DONUT_COLOR_SET: string[] = [
-  DARK_BLUE,
-  ORANGE,
-  BLUE,
-  LIGHT_ORANGE,
-  LIGHT_BLUE,
-  GRAY,
+  RED_DARK,
+  YELLOW_DARK,
+  YELLOW,
+  RED,
+  YELLOW_LIGHT,
+  RED_LIGHT,
 ];
 
 export const OUTER_RADIUS = 103;

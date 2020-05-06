@@ -2,7 +2,12 @@ import React, { useMemo } from "react";
 import * as d3 from "d3";
 import { ScaleBand, ScaleLinear } from "d3-scale";
 
-import { IBarData, NAME_TOP, RECT_WIDTH } from "../../constants";
+import {
+  IBarData,
+  NAME_TOP,
+  RECT_WIDTH,
+  VALUE_POSITION_INDEX,
+} from "../../constants";
 
 import styles from "./Rect.module.scss";
 
@@ -26,7 +31,7 @@ export const Rect: React.FC<IRect> = ({
   const percent = useMemo(() => coFinanced / value, [coFinanced, value]);
   const coHeight = height * percent;
   const coTop = height - coHeight;
-  const coLeft = RECT_WIDTH * 3;
+  const coLeft = RECT_WIDTH * 2;
 
   return (
     <g transform={`translate(${x(name)},${y(value)})`}>
@@ -47,15 +52,19 @@ export const Rect: React.FC<IRect> = ({
       />
       <line
         className={styles.line}
-        x1={RECT_WIDTH * 4}
+        x1={coLeft + RECT_WIDTH}
         y1={coTop + 0.5}
-        x2={RECT_WIDTH * 5}
+        x2={coLeft + 2 * RECT_WIDTH}
         y2={coTop + 0.5}
       />
-      <text className={styles.value} x={RECT_WIDTH * 3}>
+      <text className={styles.value} x={RECT_WIDTH * VALUE_POSITION_INDEX}>
         {format(value)}
       </text>
-      <text className={styles.value} x={coLeft + RECT_WIDTH * 3} y={coTop}>
+      <text
+        className={styles.value}
+        x={coLeft + RECT_WIDTH * VALUE_POSITION_INDEX}
+        y={coTop}
+      >
         <tspan>{format(coFinanced)} - </tspan>
         <tspan className={styles.percent}>{format(percent * 100)}%</tspan>
       </text>
