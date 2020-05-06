@@ -31,14 +31,14 @@ export const BAR_DATA: IBarData[] = [
   },
 ];
 
-export const RECT_WIDTH = 6;
+export const RECT_WIDTH = 10;
 
 export const VERTICAL_BAR_POSITION: IBarPosition = {
   top: 40,
   right: 0,
   bottom: 178,
-  left: 125,
-  width: 905,
+  left: 0,
+  width: 487,
   height: 400,
 };
 

@@ -4,7 +4,6 @@ import * as d3 from "d3";
 import { Rect } from "./Rect";
 import { BAR_DATA, VERTICAL_BAR_POSITION } from "../constants";
 import styles from "./VerticalBar.module.scss";
-import { Info } from "./Info";
 import { Title } from "../Title";
 
 export const VerticalBar: React.FC = () => {
@@ -46,9 +45,6 @@ export const VerticalBar: React.FC = () => {
           y2={lineTop + top}
           className={styles.line}
         />
-        <g transform={`translate(0,${top})`}>
-          <Info lineTop={lineTop} />
-        </g>
       </svg>
     </section>
   );
