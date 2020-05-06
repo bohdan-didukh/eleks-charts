@@ -5,6 +5,7 @@ import { Rect } from "./Rect";
 import { BAR_DATA, VERTICAL_BAR_POSITION } from "../constants";
 import styles from "./VerticalBar.module.scss";
 import { Info } from "./Info";
+import { Title } from "../Title";
 
 export const VerticalBar: React.FC = () => {
   const data = BAR_DATA;
@@ -25,22 +26,30 @@ export const VerticalBar: React.FC = () => {
     .domain([0, Math.max(...data.map(({ value }) => value))]);
 
   return (
-    <svg width={width} height={height}>
-      <g transform={`translate(${left}, ${top})`}>
-        {data.map((data) => (
-          <Rect key={data.name} data={data} x={x} y={y} lineTop={lineTop} />
-        ))}
-      </g>
-      <line
-        x1={0}
-        x2={width}
-        y1={lineTop + top}
-        y2={lineTop + top}
-        className={styles.line}
+    <section>
+      <Title
+        title="Co-financed Structural Programme Loans"
+        yearStart={2013}
+        yearEnd={2017}
+        details="In billions of euro"
       />
-      <g transform={`translate(0,${top})`}>
-        <Info lineTop={lineTop} />
-      </g>
-    </svg>
+      <svg width={width} height={height}>
+        <g transform={`translate(${left}, ${top})`}>
+          {data.map((data) => (
+            <Rect key={data.name} data={data} x={x} y={y} lineTop={lineTop} />
+          ))}
+        </g>
+        <line
+          x1={0}
+          x2={width}
+          y1={lineTop + top}
+          y2={lineTop + top}
+          className={styles.line}
+        />
+        <g transform={`translate(0,${top})`}>
+          <Info lineTop={lineTop} />
+        </g>
+      </svg>
+    </section>
   );
 };

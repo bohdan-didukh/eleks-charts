@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import { Donut } from "./Donut";
 import { Tooltip } from "./Tooltip";
-import { Bar } from "./Bar";
 import { VerticalBar } from "./VerticalBar";
 const handleMove = ({
   pageX: left,
@@ -14,15 +13,8 @@ const handleMove = ({
 function App() {
   return (
     <div className="App" onMouseMove={handleMove}>
-      <section>
-        <Donut />
-      </section>
-      <section>
-        <VerticalBar />
-      </section>
-      <section>
-        <Bar />
-      </section>
+      <Donut />
+      <VerticalBar />
     </div>
   );
 }

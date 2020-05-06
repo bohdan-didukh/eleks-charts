@@ -12,7 +12,7 @@ export const Donut: React.FC = () => {
   });
 
   return (
-    <div className={styles.block}>
+    <section className={styles.block}>
       <Title
         title="EIB total lending in Romania by sector"
         yearStart={2013}
@@ -25,6 +25,6 @@ export const Donut: React.FC = () => {
         width={DONUT_WIDTH}
         height={DONUT_HEIGHT}
       />
-    </div>
+    </section>
   );
 };

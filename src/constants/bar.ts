@@ -1,10 +1,9 @@
-import { DONUT_HEIGHT, DONUT_WIDTH } from "./donut";
-
 export interface IBarData {
   value: number;
   name: string;
   coFinanced: number;
 }
+
 export interface IBarPosition {
   top: number;
   right: number;
@@ -12,9 +11,6 @@ export interface IBarPosition {
   left: number;
   width: number;
   height: number;
-}
-export interface IBarChart extends IBarPosition {
-  data: IBarData[];
 }
 
 export const BAR_DATA: IBarData[] = [
@@ -35,18 +31,15 @@ export const BAR_DATA: IBarData[] = [
   },
 ];
 
-export const BAR_WIDTH = DONUT_WIDTH;
-export const BAR_HEIGHT = DONUT_HEIGHT;
+export const RECT_WIDTH = 6;
 
-export const RECT_HEIGHT = 32;
-
-export const BAR_POSITION: IBarPosition = {
-  top: 20,
-  right: 100,
-  bottom: 120,
-  left: 100,
-  width: BAR_WIDTH,
-  height: BAR_HEIGHT,
+export const VERTICAL_BAR_POSITION: IBarPosition = {
+  top: 40,
+  right: 0,
+  bottom: 178,
+  left: 125,
+  width: 905,
+  height: 400,
 };
 
-export const DASHED_SIZE = 2;
+export const NAME_TOP = 50;
