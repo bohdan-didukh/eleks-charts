@@ -2,11 +2,14 @@
   fill: var(--blue-dark);
 }
 
-.value {
+.name {
   font-size: 1.4rem;
   fill: var(--color-base);
-  alignment-baseline: top;
   font-weight: bold;
+}
+.value {
+  @extend .name;
+  alignment-baseline: top;
 }
 
 .percent {

@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import * as d3 from "d3";
 import { ScaleBand, ScaleLinear } from "d3-scale";
 
-import { IBarData, RECT_WIDTH } from "../../constants";
+import { IBarData, NAME_TOP, RECT_WIDTH } from "../../constants";
 
 import styles from "./Rect.module.scss";
 
@@ -58,6 +58,9 @@ export const Rect: React.FC<IRect> = ({
       <text className={styles.value} x={coLeft + RECT_WIDTH * 3} y={coTop}>
         <tspan>{format(coFinanced)} - </tspan>
         <tspan className={styles.percent}>{format(percent * 100)}%</tspan>
+      </text>
+      <text className={styles.name} y={height + NAME_TOP}>
+        {name}
       </text>
     </g>
   );

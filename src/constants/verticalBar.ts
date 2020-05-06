@@ -10,3 +10,5 @@ export const VERTICAL_BAR_POSITION: IBarPosition = {
   width: 905,
   height: 280,
 };
+
+export const NAME_TOP = 50;
