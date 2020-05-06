@@ -3,6 +3,7 @@ import "./App.css";
 import { Donut } from "./Donut";
 import { Tooltip } from "./Tooltip";
 import { Bar } from "./Bar";
+import { VerticalBar } from "./VerticalBar";
 const handleMove = ({
   pageX: left,
   pageY: top,
@@ -15,6 +16,7 @@ function App() {
     <div className="App" onMouseMove={handleMove}>
       <Donut />
       <Bar />
+      <VerticalBar />
     </div>
   );
 }

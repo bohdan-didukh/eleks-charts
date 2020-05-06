@@ -24,7 +24,6 @@ html {
   font-size: 10px;
   font-family: var(--font);
   color: var(--color-base);
-  background: var(--font);
 }
 
 h2 {

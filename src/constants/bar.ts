@@ -19,20 +19,19 @@ export interface IBarChart extends IBarPosition {
 
 export const BAR_DATA: IBarData[] = [
   {
-    name: "Environment",
-    value: 4.5,
-    coFinanced: 0.3,
+    name: "Transport",
+    value: 6.8,
+    coFinanced: 1,
   },
-
   {
     name: "Growth",
     value: 7.7,
     coFinanced: 0.36,
   },
   {
-    name: "Transport",
-    value: 6.8,
-    coFinanced: 1,
+    name: "Environment",
+    value: 4.5,
+    coFinanced: 0.3,
   },
 ];
 
