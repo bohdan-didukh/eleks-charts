@@ -1,16 +1,20 @@
+.g {
+  pointer-events: bounding-box;
+  cursor: pointer;
+}
 .rect {
   fill: var(--blue-dark);
 }
 
 .name {
   font-size: 1.4rem;
-  fill: var(--color-base);
   font-weight: bold;
 }
 
 .value {
-  @extend .name;
-  alignment-baseline: top;
+  font-size: 1.6rem;
+  font-weight: bold;
+  alignment-baseline: text-top;
 }
 
 .percent {

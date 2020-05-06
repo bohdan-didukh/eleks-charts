@@ -3,8 +3,8 @@
 }
 
 .circle {
-  width: 10px;
-  height: 10px;
+  width: var(--circle);
+  height: var(--circle);
   border-radius: 50%;
   display: inline-block;
   margin-right: 10px;

@@ -2,9 +2,15 @@ import React from "react";
 import * as d3 from "d3";
 
 import { Rect } from "./Rect";
-import { BAR_DATA, VERTICAL_BAR_POSITION } from "../constants";
+import {
+  BAR_DATA,
+  INFO_TITLES,
+  INFO_TOP,
+  VERTICAL_BAR_POSITION,
+} from "../constants";
 import styles from "./VerticalBar.module.scss";
 import { Title } from "../Title";
+import { Info } from "./Info";
 
 export const VerticalBar: React.FC = () => {
   const data = BAR_DATA;
@@ -14,8 +20,7 @@ export const VerticalBar: React.FC = () => {
     .scaleBand()
     .range([0, width - left - right])
     .domain(data.map((d) => d.name))
-
-    .padding(0.5);
+    .padding(0.14);
 
   const lineTop = height - top - bottom;
 
@@ -45,6 +50,9 @@ export const VerticalBar: React.FC = () => {
           y2={lineTop + top}
           className={styles.line}
         />
+        {INFO_TITLES.map((info) => (
+          <Info top={lineTop + top + INFO_TOP} {...info} key={info.title} />
+        ))}
       </svg>
     </section>
   );

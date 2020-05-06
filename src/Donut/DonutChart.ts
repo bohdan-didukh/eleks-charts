@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { Selection, PieArcDatum } from "d3";
 
 import {
+  DONUT_ANGLE,
   DONUT_COLOR_SET,
   DONUT_DATA,
   DONUT_LABEL_RATIO,
@@ -85,6 +86,7 @@ export class DonutChart {
 
     const pie = d3
       .pie<DonutItem>()
+      .startAngle(DONUT_ANGLE * Math.PI)
       .sort(null)
       .value((d) => d.value);
 

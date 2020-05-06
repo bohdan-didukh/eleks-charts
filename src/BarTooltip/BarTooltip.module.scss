@@ -1,0 +1,82 @@
+$objective-height: 1.6rem;
+$objective-dot: 0.4rem;
+$objective-padding-v: 0.2rem;
+
+.tooltip {
+  padding: 1rem 2.5rem 1rem 1.5rem;
+}
+
+.circle {
+  width: var(--circle);
+  height: var(--circle);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: var(--circle);
+  transition: background-color var(--speed);
+
+  &.blue {
+    background: var(--blue-dark);
+  }
+
+  &.orange {
+    background: var(--orange);
+  }
+}
+
+.title {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  font-weight: bold;
+}
+
+.info {
+  margin: 1rem 0 0.3rem;
+  color: var(--gray-dark);
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.percent {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0.7rem;
+}
+
+.value {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  opacity: 0.5;
+  color: var(--color-base);
+}
+
+.objectives {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  &Title {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.2rem;
+    color: var(--blue-dark);
+  }
+}
+
+.objective {
+  font-size: 1.2rem;
+  line-height: $objective-height;
+  padding: $objective-padding-v 0 $objective-padding-v 1.2rem;
+  max-width: 155px;
+  display: block;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: #{($objective-height + $objective-dot) / 2 - $objective-padding-v};
+    left: 0;
+    width: $objective-dot;
+    height: $objective-dot;
+    border-radius: 50%;
+    background: var(--blue-dark);
+  }
+}

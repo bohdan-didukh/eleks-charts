@@ -63,3 +63,5 @@ export const DONUT_LABEL_RATIO = 1.65;
 // loader
 export const LOADER_RADIUS = (OUTER_RADIUS - INNER_RADIUS) / 2 + INNER_RADIUS;
 export const LOADER_STROKE_WIDTH = OUTER_RADIUS - INNER_RADIUS;
+
+export const DONUT_ANGLE = -0.17;
