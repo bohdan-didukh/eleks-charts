@@ -4,14 +4,13 @@
 
 .value {
   font-size: 1.4rem;
-  color: var(--color-base);
-  alignment-baseline: middle;
+  fill: var(--color-base);
+  alignment-baseline: top;
+  font-weight: bold;
 }
 
-.name {
-  @extend .value;
-  font-weight: bold;
-  text-anchor: end;
+.percent {
+  fill: var(--orange);
 }
 
 .coFinanced {
@@ -19,14 +18,6 @@
   font-size: 1.4rem;
 }
 
-.dashed {
-  //stroke: red;
-}
-
-.rectDashed {
-  fill: none;
-}
-
 .line {
-  stroke: var(--orange-light);
+  stroke: var(--gray);
 }
