@@ -2,6 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import { Rect } from "./Rect";
 import { IBarChart } from "../constants";
+import { XAxis } from "./XAsis";
 
 export const BarChart: React.FC<IBarChart> = (props) => {
   const { data, top, left, right, bottom, width, height } = props;
@@ -19,7 +20,8 @@ export const BarChart: React.FC<IBarChart> = (props) => {
   return (
     <>
       <svg width={width} height={height}>
-        <g transform={`translate(${props.left}, ${props.top})`}>
+        <g transform={`translate(${left}, ${top})`}>
+          <XAxis x={x} top={height - top - bottom} />
           {data.map((data) => (
             <Rect key={data.name} data={data} x={x} y={y} />
           ))}
