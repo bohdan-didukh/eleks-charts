@@ -12,16 +12,16 @@ export interface IRect {
   data: IBarData;
   y: ScaleLinear<number, number>;
   x: ScaleBand<string>;
-  bottom: number;
+  lineTop: number;
 }
 export const Rect: React.FC<IRect> = ({
   data: { value, name, coFinanced },
-  bottom,
+  lineTop,
   x,
   y,
 }) => {
   const width = Math.min(x.bandwidth(), RECT_WIDTH);
-  const height = bottom - y(value);
+  const height = lineTop - y(value);
 
   const percent = useMemo(() => coFinanced / value, [coFinanced, value]);
   const coHeight = height * percent;

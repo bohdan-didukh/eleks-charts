@@ -7,6 +7,7 @@
   fill: var(--color-base);
   font-weight: bold;
 }
+
 .value {
   @extend .name;
   alignment-baseline: top;
