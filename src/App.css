@@ -23,18 +23,19 @@
   --padding: 7rem;
 }
 
-@media all and(max-width: 900px) {
-  :root {
-    --main: 95%;
-    --padding: 4rem;
-  }
-}
-
 body,
 html {
   font-size: 10px;
   font-family: var(--font);
   color: var(--color-base);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 h2 {

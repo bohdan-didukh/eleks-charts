@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import styles from "./Tooltip.module.css";
 
@@ -14,10 +14,6 @@ export const TooltipComponent: React.FC<ITooltipComponent> = ({
   left = 0,
   children = null,
 }) => {
-  useEffect(() => {
-    console.log("TooltipComponent did mount");
-  }, []);
-
   return (
     <div
       className={`${styles.tooltip} ${visible ? styles.visible : ""}`}
