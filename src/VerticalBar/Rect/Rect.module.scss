@@ -1,3 +1,7 @@
+.g {
+  pointer-events: bounding-box;
+  cursor: pointer;
+}
 .rect {
   fill: var(--blue-dark);
 }

@@ -10,6 +10,8 @@ import {
 } from "../../constants";
 
 import styles from "./Rect.module.scss";
+import { Tooltip, TooltipTypes } from "../../Tooltip";
+import { BarTooltipProps } from "../../BarTooltip";
 
 const format = d3.format(".1f");
 
@@ -19,8 +21,23 @@ export interface IRect {
   x: ScaleBand<string>;
   lineTop: number;
 }
+
+function showTooltip(data: BarTooltipProps) {
+  const tooltip = new Tooltip();
+  tooltip.set({
+    visible: true,
+    type: TooltipTypes.bar,
+    data,
+  });
+}
+
+function hideTooltip() {
+  new Tooltip().hide();
+}
+
 export const Rect: React.FC<IRect> = ({
   data: { value, name, coFinanced },
+  data,
   lineTop,
   x,
   y,
@@ -33,8 +50,16 @@ export const Rect: React.FC<IRect> = ({
   const coTop = height - coHeight;
   const coLeft = RECT_WIDTH * 2;
 
+  const handleMove = () =>
+    showTooltip({ ...data, percent: format(percent * 100) });
+
   return (
-    <g transform={`translate(${x(name)},${y(value)})`}>
+    <g
+      transform={`translate(${x(name)},${y(value)})`}
+      onMouseOver={handleMove}
+      onMouseOut={hideTooltip}
+      className={styles.g}
+    >
       <rect width={width} height={height} className={styles.rect} />
       <rect
         className={styles.coFinanced}

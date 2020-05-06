@@ -4,6 +4,7 @@ export interface IBarData {
   value: number;
   name: string;
   coFinanced: number;
+  objectives: string[];
 }
 
 export interface IBarPosition {
@@ -25,16 +26,37 @@ export const BAR_DATA: IBarData[] = [
     name: "Transport",
     value: 6.8,
     coFinanced: 1,
+    objectives: [
+      "Sustainability",
+      "Removing bottlenecks in key network infrastructures",
+      "Reducing the environmental impact",
+    ],
   },
   {
     name: "Growth",
     value: 7.7,
     coFinanced: 0.36,
+    objectives: [
+      "Energy",
+      "Environmental improvement",
+      "Research",
+      "Development and innovation",
+      "Information and communication technology",
+      "Education",
+      "Social amenities",
+    ],
   },
   {
     name: "Environment",
     value: 4.5,
     coFinanced: 0.3,
+    objectives: [
+      "Water treatment",
+      "Municipal solid waste management",
+      "Climate action",
+      "Environmental protection",
+      "Sustainable development",
+    ],
   },
 ];
 

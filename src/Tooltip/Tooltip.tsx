@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { TooltipComponent } from "./TooltipComponent";
 import { DonutTooltip, IDonutTooltip } from "../DonutTooltip";
+import { BarTooltip, BarTooltipProps } from "../BarTooltip";
 
 export enum TooltipPosition {
   top = "top",
@@ -12,6 +13,7 @@ export enum TooltipPosition {
 
 export enum TooltipTypes {
   donut = "donut",
+  bar = "bar",
 }
 
 export type TooltipPositionType = keyof typeof TooltipPosition;
@@ -26,7 +28,7 @@ export class Tooltip {
   private left: number = 0;
   private position: TooltipPositionType = TooltipPosition.bottom;
   private type: TooltipType = TooltipTypes.donut;
-  private data: IDonutTooltip = {};
+  private data?: IDonutTooltip | BarTooltipProps;
 
   constructor() {
     if (typeof Tooltip.instance === "object") {
@@ -46,11 +48,21 @@ export class Tooltip {
   }
 
   render() {
-    const { visible, top, left, position, data } = this;
+    const { visible, top, left, position, data, type } = this;
+
     ReactDOM.render(
       <React.StrictMode>
         <TooltipComponent {...{ visible, top, left, position }}>
-          <DonutTooltip {...data} />
+          {data && (
+            <>
+              {type === TooltipTypes.donut && (
+                <DonutTooltip {...(data as IDonutTooltip)} />
+              )}
+              {type === TooltipTypes.bar && (
+                <BarTooltip {...(data as BarTooltipProps)} />
+              )}
+            </>
+          )}
         </TooltipComponent>
       </React.StrictMode>,
       document.getElementById(TOOLTIP_ID)
