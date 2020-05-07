@@ -1,9 +1,9 @@
 .eleks {
-  margin-top: 58px;
+  margin-top: 4rem;
   display: inline-block;
   overflow: hidden;
   position: relative;
-  padding-bottom: 5px;
+  padding-bottom: 0.5rem;
 }
 
 .eleks::after {
