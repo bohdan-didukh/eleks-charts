@@ -53,6 +53,11 @@
   font-size: 1.7rem;
   font-weight: bold;
   line-height: 1.2em;
+  transition: opacity var(--speed);
+
+  &.hidden {
+    opacity: 0;
+  }
 }
 
 .loader {

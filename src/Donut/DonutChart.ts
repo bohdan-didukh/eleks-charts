@@ -184,7 +184,7 @@ export class DonutChart {
     const { arc } = this;
     this.pieces
       ?.append("g")
-      .attr("class", styles.value)
+      .attr("class", `${styles.value} ${styles.hidden}`)
       .append("text")
       .text(({ value }) => `${this.percent(value)}%`)
       .attr("text-anchor", (d) => {
@@ -301,12 +301,12 @@ export class DonutChart {
           const node = d3.select(this.pieces.nodes()[index]);
           if (itemProgress > 0) {
             node.select(`.${styles.title}`).attr("class", styles.title);
+            node.select(`.${styles.value}`).attr("class", styles.value);
           }
 
           if (itemProgress === 1 && progress > 0) {
             node.select(`.${styles.line}`).attr("class", styles.line);
           }
-          node.select(`.${styles.value}`).attr("opacity", itemProgress);
         }
 
         return `${format0(itemProgress * this.percent(value))}%`;
