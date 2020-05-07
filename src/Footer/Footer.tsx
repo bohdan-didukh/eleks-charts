@@ -9,7 +9,6 @@ export const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <main>
-        <div>Version 2</div>
         <section>
           <Title
             title="EIB total lending in Romania by sector"

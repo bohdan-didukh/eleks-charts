@@ -27,3 +27,15 @@
 .white .details {
   color: var(--color-bg);
 }
+
+.details,
+.title {
+  transition: color var(--speed-double);
+}
+
+.container.black:not(.white) {
+  & .details,
+  & .title {
+    color: var(--color-base);
+  }
+}

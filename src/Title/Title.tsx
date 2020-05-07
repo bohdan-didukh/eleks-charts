@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Title.module.scss";
+import { SPEED_DOUBLE } from "../constants";
 
 export interface ITitle {
   title: string;
@@ -16,12 +17,20 @@ export const Title: React.FC<ITitle> = ({
   yearEnd,
   details,
   white = false,
-}) => (
-  <h2 className={`${styles.container} ${white ? styles.white : ""}`}>
-    <div className={styles.title}>{title}</div>
-    <span className={styles.years}>
-      ({yearStart} - {yearEnd})
-    </span>
-    <span className={styles.details}>{details}</span>
-  </h2>
-);
+}) => {
+  const [black, setBlack] = useState(styles.black);
+
+  useEffect(() => {
+    setTimeout(() => setBlack(""), SPEED_DOUBLE);
+  }, []);
+
+  return (
+    <h2 className={`${styles.container} ${black} ${white ? styles.white : ""}`}>
+      <div className={styles.title}>{title}</div>
+      <span className={styles.years}>
+        ({yearStart} - {yearEnd})
+      </span>
+      <span className={styles.details}>{details}</span>
+    </h2>
+  );
+};

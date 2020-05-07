@@ -10,12 +10,12 @@ export const Details = () => {
         Communication Department’
       </div>
       <div className={styles.title}>
-        Animated infographic based on the brochure ‘Bank’s activity in Romania’:
+        Animated infographics based on the brochure ‘Bank’s activity in
+        Romania’:
         <br />
         ‘EIB total lending in Romania by sector (2013-2017)' and ‘Co-financed
         Structural Programme Loans (2013-2017)’
       </div>
-      <div className={styles.version}>Version 1</div>
     </>
   );
 };

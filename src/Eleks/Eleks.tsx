@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Eleks.css";
 import { SPEED_DOUBLE } from "../constants";
@@ -6,7 +6,9 @@ import { SPEED_DOUBLE } from "../constants";
 export const Eleks = () => {
   const [black, setBlack] = useState("black");
 
-  setTimeout(() => setBlack(""), SPEED_DOUBLE);
+  useEffect(() => {
+    setTimeout(() => setBlack(""), SPEED_DOUBLE);
+  }, []);
 
   return (
     <a href="//eleks.com" target="blank" className={`eleks ${black}`}>
