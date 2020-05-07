@@ -21,7 +21,7 @@ import {
 } from "../constants";
 
 import styles from "./Donut.module.scss";
-import { wrap } from "../utils/wrap";
+import { wrap } from "../utils";
 import { Tooltip, TooltipTypes } from "../Tooltip";
 import { animateCircle, describeArc } from "./helpers";
 
@@ -248,7 +248,7 @@ export class DonutChart {
       data: {
         color: this.colorScale(d.data.title) as string,
         title: d.data.title,
-        percent: this.percent(d.value),
+        percent: "" + this.percent(d.value),
         value: d.value,
       },
     });

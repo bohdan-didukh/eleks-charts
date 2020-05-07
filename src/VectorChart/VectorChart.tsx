@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { SPEED_HEX, VECTOR_SIZE } from "../constants";
+import { SPEED_QUAD, VECTOR_SIZE } from "../constants";
 
 import styles from "./Vector.module.scss";
 
@@ -27,8 +27,8 @@ export const VectorChart: React.FC<VectorChartProps> = ({ data }) => {
       const animate = (timestamp: number) => {
         const timeProgress = timestamp - start;
 
-        if (timeProgress < SPEED_HEX) {
-          setProgress(timeProgress / SPEED_HEX);
+        if (timeProgress < SPEED_QUAD) {
+          setProgress(timeProgress / SPEED_QUAD);
 
           requestAnimationFrame(animate);
         } else {

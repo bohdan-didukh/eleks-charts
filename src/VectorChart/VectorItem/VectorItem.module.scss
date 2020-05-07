@@ -18,3 +18,16 @@
     opacity: 0;
   }
 }
+
+.rect {
+  transition: transform var(--speed);
+}
+
+.item {
+  pointer-events: bounding-box;
+  cursor: pointer;
+
+  &:hover .rect {
+    transform: scale(1, 1.3) translate(0, -1.6px);
+  }
+}

@@ -6,7 +6,7 @@ import styles from "./DonutTooltip.module.css";
 export interface IDonutTooltip {
   color?: string;
   title?: string;
-  percent?: number;
+  percent?: string;
   value?: number;
 }
 export const DonutTooltip: React.FC<IDonutTooltip> = ({
