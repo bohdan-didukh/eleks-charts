@@ -14,12 +14,8 @@
 .title {
   font-size: 1.4rem;
   line-height: 1.6rem;
-}
-
-.percent {
   font-weight: bold;
-  font-size: 1.2rem;
-  margin: 0.5rem 0 0.7rem;
+  margin-bottom: 0.8rem;
 }
 
 .value {

@@ -123,8 +123,8 @@ export class DonutChart {
       ?.append("g")
       .attr("class", styles.total)
       .append("text")
-      .text(`EIB signed €${this.total} total`)
-      .call(wrap, 100);
+      .text(`EUR ${this.total} billion signed in total`)
+      .call(wrap, 140);
 
   drawLines = () => {
     // draw piece lines
@@ -142,11 +142,11 @@ export class DonutChart {
       })
       .attr("x2", (d) => {
         // @ts-ignore
-        return arc.centroid(d)[0] * 1.5;
+        return arc.centroid(d)[0] * 1.45;
       })
       .attr("y2", (d) => {
         // @ts-ignore
-        return arc.centroid(d)[1] * 1.5;
+        return arc.centroid(d)[1] * 1.45;
       });
   };
 
@@ -190,7 +190,7 @@ export class DonutChart {
       ?.append("g")
       .attr("class", styles.value)
       .append("text")
-      .text(({ value }) => `€${value}`)
+      .text(({ value }) => `${this.percent(value)}%`)
       .attr("text-anchor", (d) => {
         // @ts-ignore
         const [x] = arc.centroid(d);

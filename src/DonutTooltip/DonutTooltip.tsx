@@ -17,10 +17,13 @@ export const DonutTooltip: React.FC<IDonutTooltip> = ({
 }) => {
   return (
     <div className={styles.tooltip}>
-      <span className={styles.circle} style={{ background: color }} />
-      <span className={styles.title}>{title}</span>
-      <div className={styles.percent}>{percent}%</div>
-      <div className={styles.value}>EUR {value} billion</div>
+      <div className={styles.title}>{title}</div>
+      <div>
+        <span className={styles.circle} style={{ background: color }} />
+        <span className={styles.value}>
+          EUR {value} billion - {percent}%
+        </span>
+      </div>
     </div>
   );
 };

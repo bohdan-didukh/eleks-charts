@@ -21,7 +21,6 @@
   --orange-light: #f4a16b;
 
   /*sizes*/
-  --main: 1000px;
   --padding: 7rem;
   --circle: 1rem;
 }
@@ -54,11 +53,9 @@ section {
 }
 
 main {
-  width: var(--main);
-  margin: 0 auto;
 }
 
 .charts {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
