@@ -7,8 +7,10 @@
   --color-shadow: rgba(0, 0, 0, 0.5);
 
   /*transition*/
-  --speed: 0.28s;
+  --speed: 0.25s;
+  --speed-half: calc(var(--speed) / 2);
   --speed-double: calc(var(--speed) * 2);
+  --speed-quad: calc(var(--speed) * 4);
   --delay-diff: 0.05s;
 
   /*colors from the colors.ts*/

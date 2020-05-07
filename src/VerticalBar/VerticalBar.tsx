@@ -8,9 +8,9 @@ import {
   INFO_TOP,
   VERTICAL_BAR_POSITION,
 } from "../constants";
-import styles from "./VerticalBar.module.scss";
 import { Title } from "../Title";
 import { Info } from "./Info";
+import { Line } from "./Line";
 
 export const VerticalBar: React.FC = () => {
   const data = BAR_DATA;
@@ -39,19 +39,25 @@ export const VerticalBar: React.FC = () => {
       />
       <svg width={width} height={height}>
         <g transform={`translate(${left}, ${top})`}>
-          {data.map((data) => (
-            <Rect key={data.name} data={data} x={x} y={y} lineTop={lineTop} />
+          {data.map((data, index) => (
+            <Rect
+              key={data.name}
+              data={data}
+              x={x}
+              y={y}
+              lineTop={lineTop}
+              index={index + 1}
+            />
           ))}
         </g>
-        <line
-          x1={0}
-          x2={width}
-          y1={lineTop + top}
-          y2={lineTop + top}
-          className={styles.line}
-        />
-        {INFO_TITLES.map((info) => (
-          <Info top={lineTop + top + INFO_TOP} {...info} key={info.title} />
+        <Line x1={0} x2={width} y1={lineTop + top} y2={lineTop + top} />
+        {INFO_TITLES.map((info, index) => (
+          <Info
+            top={lineTop + top + INFO_TOP}
+            {...info}
+            key={info.title}
+            index={index + 1}
+          />
         ))}
       </svg>
     </section>

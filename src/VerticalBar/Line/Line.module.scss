@@ -1,0 +1,10 @@
+.line {
+  stroke: var(--gray);
+  transition: transform var(--speed-quad);
+  will-change: transform;
+  transform: scale(1, 1);
+
+  &.hidden {
+    transform: scale(0, 1);
+  }
+}
