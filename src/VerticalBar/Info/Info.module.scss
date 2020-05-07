@@ -3,4 +3,20 @@
   line-height: 1.6rem;
   alignment-baseline: middle;
   cursor: default;
+  transition: transform var(--speed), opacity var(--speed);
+}
+.circle {
+  transition: all var(--speed);
+}
+
+.info.hidden {
+  & .circle {
+    transform: scale(0.5) translateX(-2rem);
+    opacity: 0;
+  }
+
+  & .text {
+    transform: translateX(-3rem);
+    opacity: 0;
+  }
 }

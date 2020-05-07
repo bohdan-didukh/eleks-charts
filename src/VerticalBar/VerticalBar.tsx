@@ -51,8 +51,13 @@ export const VerticalBar: React.FC = () => {
           ))}
         </g>
         <Line x1={0} x2={width} y1={lineTop + top} y2={lineTop + top} />
-        {INFO_TITLES.map((info) => (
-          <Info top={lineTop + top + INFO_TOP} {...info} key={info.title} />
+        {INFO_TITLES.map((info, index) => (
+          <Info
+            top={lineTop + top + INFO_TOP}
+            {...info}
+            key={info.title}
+            index={index + 1}
+          />
         ))}
       </svg>
     </section>
