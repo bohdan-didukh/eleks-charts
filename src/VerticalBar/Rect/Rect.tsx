@@ -109,9 +109,9 @@ export const Rect: React.FC<IRect> = ({
       <line
         className={styles.line}
         x1={RECT_WIDTH}
-        y1={projectY}
+        y1={projectY + 0.5}
         x2={RECT_WIDTH * 2}
-        y2={projectY}
+        y2={projectY + 0.5}
         opacity={progress}
       />
       <line
