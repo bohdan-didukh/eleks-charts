@@ -1,6 +1,6 @@
 .tooltip {
   position: absolute;
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: 0 2px 4px var(--color-shadow);
   transition: opacity var(--speed), visibility var(--speed);
   transform: translateY(-50%);
@@ -29,4 +29,5 @@
   z-index: 2;
   background: var(--color-bg);
   position: relative;
+  border-radius: 8px;
 }

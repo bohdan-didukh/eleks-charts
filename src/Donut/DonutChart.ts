@@ -168,7 +168,7 @@ export class DonutChart {
         // @ts-ignore
         let [x, y] = arc.centroid(d);
         if (Math.abs(x) < INNER_RADIUS / 2) {
-          y -= 5;
+          y += 5;
         }
         return y * DONUT_LABEL_RATIO;
       })
@@ -205,7 +205,7 @@ export class DonutChart {
         // @ts-ignore
         let [x, y] = arc.centroid(d);
         if (Math.abs(x) < INNER_RADIUS / 2) {
-          y -= 5;
+          y += 8;
         }
         return y * DONUT_LABEL_RATIO - 10;
       })
