@@ -3,10 +3,13 @@
   line-height: 1.6rem;
   alignment-baseline: middle;
   cursor: default;
-  transition: transform var(--speed), opacity var(--speed);
 }
 .circle {
   transition: all var(--speed);
+}
+
+.textBlock {
+  transition: transform var(--speed), opacity var(--speed);
 }
 
 .info.hidden {
@@ -15,7 +18,7 @@
     opacity: 0;
   }
 
-  & .text {
+  & .textBlock {
     transform: translateX(-3rem);
     opacity: 0;
   }

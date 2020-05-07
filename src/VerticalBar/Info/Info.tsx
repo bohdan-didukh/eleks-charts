@@ -24,10 +24,14 @@ export const Info: React.FC<InfoProps> = ({
       className={`${styles.info} ${hidden ? styles.hidden : ""}`}
       transform={`translate(${left}, ${top})`}
     >
-      <circle r={5} fill={fill} className={styles.circle} />
-      <text dx={12} className={styles.text}>
-        {title}
-      </text>
+      <g className={styles.circle}>
+        <circle r={5} fill={fill} />
+      </g>
+      <g className={styles.textBlock}>
+        <text dx={12} className={styles.text}>
+          {title}
+        </text>
+      </g>
     </g>
   );
 };
