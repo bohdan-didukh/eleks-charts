@@ -30,12 +30,12 @@ export const DONUT_DATA: DonutItem[] = [
     value: 0.47,
   },
   {
-    title: "School rehabilitation",
-    value: 0.14,
-  },
-  {
     title: "Other",
     value: 0.28,
+  },
+  {
+    title: "School rehabilitation",
+    value: 0.14,
   },
 ];
 

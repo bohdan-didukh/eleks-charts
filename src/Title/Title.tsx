@@ -7,6 +7,7 @@ export interface ITitle {
   yearStart: number;
   yearEnd: number;
   details: string;
+  white?: boolean;
 }
 
 export const Title: React.FC<ITitle> = ({
@@ -14,8 +15,9 @@ export const Title: React.FC<ITitle> = ({
   yearStart,
   yearEnd,
   details,
+  white = false,
 }) => (
-  <h2 className={styles.container}>
+  <h2 className={`${styles.container} ${white ? styles.white : ""}`}>
     <div className={styles.title}>{title}</div>
     <span className={styles.years}>
       ({yearStart} - {yearEnd})

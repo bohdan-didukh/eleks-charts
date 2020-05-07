@@ -89,3 +89,10 @@ export class Tooltip {
     this.render();
   };
 }
+
+const handleMove = ({ pageX: left, pageY: top }: MouseEvent) => {
+  const tooltip = new Tooltip();
+  tooltip.set({ top, left });
+};
+
+document.body.addEventListener("mousemove", handleMove);

@@ -1,7 +1,6 @@
 .container {
   width: 500px;
   max-width: 100%;
-  margin: 0 auto;
   padding-bottom: var(--padding);
   text-align: left;
 }
@@ -21,4 +20,9 @@
   margin-left: 0.5rem;
   color: var(--blue-dark);
   font-weight: normal;
+}
+
+.white .title,
+.white .details {
+  color: var(--color-bg);
 }
