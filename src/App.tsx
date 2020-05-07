@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Donut } from "./Donut";
-// import { VerticalBar } from "./VerticalBar";
+import { VerticalBar } from "./VerticalBar";
 import { Footer } from "./Footer";
 import { Eleks } from "./Eleks";
 import { Details } from "./Details";
@@ -16,8 +16,10 @@ function App() {
       </header>
       <main>
         <Details />
-        <Donut />
-        {/*<VerticalBar />*/}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Donut />
+          <VerticalBar />
+        </div>
       </main>
       <Footer />
     </div>

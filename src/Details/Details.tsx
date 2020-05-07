@@ -13,7 +13,8 @@ export const Details = () => {
         Animated infographic and based on the brocure ‘Bank’s activity in
         Romania’ No 1:
         <br />
-        ‘EIB total lending in Romania by sector (2013-2017)'
+        ‘EIB total lending in Romania by sector (2013-2017)' and ‘Co-financed
+        Structural Programme Loans (2013-2017)’
       </div>
       <div className={styles.version}>Version 1</div>
     </>
