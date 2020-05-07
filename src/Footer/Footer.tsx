@@ -2,6 +2,8 @@ import React from "react";
 import { Title } from "../Title";
 
 import styles from "./Footer.module.scss";
+import { VectorChart } from "../VectorChart";
+import { DONUT_DATA } from "../constants";
 
 export const Footer: React.FC = () => {
   return (
@@ -15,6 +17,7 @@ export const Footer: React.FC = () => {
           details="In billions of euro"
           white
         />
+        <VectorChart data={DONUT_DATA} />
       </main>
     </footer>
   );
