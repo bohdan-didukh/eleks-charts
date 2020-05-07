@@ -39,8 +39,15 @@ export const VerticalBar: React.FC = () => {
       />
       <svg width={width} height={height}>
         <g transform={`translate(${left}, ${top})`}>
-          {data.map((data) => (
-            <Rect key={data.name} data={data} x={x} y={y} lineTop={lineTop} />
+          {data.map((data, index) => (
+            <Rect
+              key={data.name}
+              data={data}
+              x={x}
+              y={y}
+              lineTop={lineTop}
+              index={index + 1}
+            />
           ))}
         </g>
         <Line x1={0} x2={width} y1={lineTop + top} y2={lineTop + top} />

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Line.module.scss";
-import { SPEED } from "../../constants";
 
 export interface LineProps {
   x1: number;
@@ -13,7 +12,7 @@ export const Line: React.FC<LineProps> = ({ x1, x2, y1, y2 }) => {
   const [hidden, setHidden] = useState<boolean>(true);
 
   useEffect(() => {
-    setTimeout(() => setHidden(false), SPEED);
+    setTimeout(() => setHidden(false), 0);
   }, []);
 
   return (

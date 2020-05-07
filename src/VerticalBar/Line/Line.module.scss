@@ -1,6 +1,6 @@
 .line {
   stroke: var(--gray);
-  transition: transform var(--speed-double);
+  transition: transform var(--speed-quad);
   will-change: transform;
   transform: scale(1, 1);
 

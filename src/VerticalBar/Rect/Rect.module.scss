@@ -9,6 +9,13 @@
 .name {
   font-size: 1.4rem;
   font-weight: bold;
+  transition: opacity var(--speed), transform var(--speed);
+  will-change: transform, opacity;
+
+  &.hidden {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
 }
 
 .value {
