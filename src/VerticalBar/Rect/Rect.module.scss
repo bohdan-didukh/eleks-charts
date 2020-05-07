@@ -9,6 +9,8 @@
 .name {
   font-size: 1.4rem;
   font-weight: bold;
+}
+.nameG {
   transition: opacity var(--speed), transform var(--speed);
   will-change: transform, opacity;
 

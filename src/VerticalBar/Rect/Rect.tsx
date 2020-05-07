@@ -141,12 +141,12 @@ export const Rect: React.FC<IRect> = ({
           {format(percent * progress * 100)}%
         </tspan>
       </text>
-      <text
-        className={`${styles.name} ${nameHidden ? styles.hidden : ""}`}
-        y={height + NAME_TOP}
-      >
-        {name}
-      </text>
+
+      <g className={`${styles.nameG} ${nameHidden ? styles.hidden : ""}`}>
+        <text className={styles.name} y={height + NAME_TOP}>
+          {name}
+        </text>
+      </g>
     </g>
   );
 };
