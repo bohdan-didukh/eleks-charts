@@ -9,6 +9,7 @@
   /*transition*/
   --speed: 0.28s;
   --speed-double: calc(var(--speed) * 2);
+  --speed-quad: calc(var(--speed) * 4);
   --delay-diff: 0.05s;
 
   /*colors from the colors.ts*/
