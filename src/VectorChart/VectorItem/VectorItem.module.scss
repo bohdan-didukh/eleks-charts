@@ -8,3 +8,13 @@
   fill: var(--color-bg);
   font-size: 1.4rem;
 }
+
+.titleG {
+  transition: transform var(--speed), opacity var(--speed);
+  will-change: transform, opacity;
+
+  &.hidden {
+    transform: translateX(-1rem);
+    opacity: 0;
+  }
+}

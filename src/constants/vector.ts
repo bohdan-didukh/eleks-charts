@@ -1,4 +1,7 @@
-export const VECTOR_WIDTH = 950;
-export const VECTOR_HEIGHT = 150;
-export const VECTOR_PADDING_RIGHT = 50;
+export const VECTOR_SIZE = {
+  width: 950,
+  height: 150,
+  left: 20,
+  right: 50,
+};
 export const VECTOR_LINE_HEIGHT = 7;

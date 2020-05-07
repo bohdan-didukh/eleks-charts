@@ -1,9 +1,5 @@
-import React, { useMemo } from "react";
-import {
-  VECTOR_HEIGHT,
-  VECTOR_PADDING_RIGHT,
-  VECTOR_WIDTH,
-} from "../constants";
+import React, { useEffect, useMemo, useState } from "react";
+import { SPEED_HEX, VECTOR_SIZE } from "../constants";
 
 import styles from "./Vector.module.scss";
 
@@ -14,33 +10,76 @@ import { format } from "../utils";
 export interface VectorChartProps {
   data: DonutItem[];
 }
+
 export const VectorChart: React.FC<VectorChartProps> = ({ data }) => {
+  const [progress, setProgress] = useState<number>(0);
   const total = useMemo(
     () => data.reduce((total, { value }) => value + total, 0),
     [data]
   );
 
-  let startPercent = 0;
+  let endPercent = 0;
+
+  const { width, height, left, right } = VECTOR_SIZE;
+
+  useEffect(() => {
+    const animateRect = (start: number) => {
+      const animate = (timestamp: number) => {
+        const timeProgress = timestamp - start;
+
+        if (timeProgress < SPEED_HEX) {
+          setProgress(timeProgress / SPEED_HEX);
+
+          requestAnimationFrame(animate);
+        } else {
+          setProgress(1);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animateRect);
+  }, [total]);
 
   return (
-    <svg width={VECTOR_WIDTH + VECTOR_PADDING_RIGHT} height={VECTOR_HEIGHT}>
-      <g transform="translate(0,15)">
+    <svg
+      width={width + left + right}
+      height={height}
+      style={{ position: "relative", left: -left }}
+    >
+      <g transform={`translate(${left},15)`}>
         <text className={styles.total}>
-          EUR {format(total)} billion signed in total
+          EUR {format(total * progress)} billion signed in total
         </text>
       </g>
-      <g transform="translate(0,34)">
+      <g transform={`translate(${left},34)`}>
         {data.map((item, index) => {
           const percent = Math.round((item.value / total) * 100) / 100;
-          startPercent += percent;
+          const itemWidth = percent * width;
+          const startPercent = endPercent;
+          endPercent += percent;
+
+          const itemProgress = (() => {
+            if (progress < startPercent) {
+              return 0;
+            }
+            if (progress > startPercent && progress < endPercent) {
+              // percent = 100 %
+              // progress - start percent - x%
+              return (progress - startPercent) / percent;
+            }
+            return 1;
+          })();
+
           return (
             <VectorItem
               key={item.title}
               data={item}
-              index={index}
-              left={(startPercent - percent) * VECTOR_WIDTH}
-              width={percent * VECTOR_WIDTH}
+              left={(endPercent - percent) * width}
+              width={itemWidth}
               percent={percent}
+              progress={itemProgress}
               fill={DONUT_COLOR_SET[index]}
             />
           );
