@@ -20,7 +20,11 @@
 }
 
 .rect {
-  transition: transform var(--speed);
+  transition: transform var(--speed), fill var(--speed-double);
+
+  &.gray {
+    fill: var(--gray) !important;
+  }
 }
 
 .item {

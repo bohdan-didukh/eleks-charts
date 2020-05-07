@@ -299,8 +299,11 @@ export class DonutChart {
         // d3.select(node[index]).attr("opacity", itemProgress);
         if (this.pieces) {
           const node = d3.select(this.pieces.nodes()[index]);
-          if (itemProgress === 1) {
+          if (itemProgress > 0) {
             node.select(`.${styles.title}`).attr("class", styles.title);
+          }
+
+          if (itemProgress === 1 && progress > 0) {
             node.select(`.${styles.line}`).attr("class", styles.line);
           }
           node.select(`.${styles.value}`).attr("opacity", itemProgress);

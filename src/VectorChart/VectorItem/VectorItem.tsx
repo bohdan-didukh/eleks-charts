@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
-import { DonutItem, VECTOR_LINE_HEIGHT } from "../../constants";
+import { DonutItem, SPEED_DOUBLE, VECTOR_LINE_HEIGHT } from "../../constants";
 import styles from "./VectorItem.module.scss";
 import { format0, wrap } from "../../utils";
 import { Tooltip, TooltipPosition, TooltipTypes } from "../../Tooltip";
@@ -41,8 +41,11 @@ export const VectorItem: React.FC<VectorItemProps> = ({
 }) => {
   const titleRef = useRef(null);
 
+  const [gray, setGray] = useState<boolean>(true);
+
   useEffect(() => {
     d3.select(titleRef.current).call(wrap, 120);
+    setTimeout(() => setGray(false), SPEED_DOUBLE);
   }, []);
 
   const handleMove = () =>
@@ -55,9 +58,9 @@ export const VectorItem: React.FC<VectorItemProps> = ({
       onMouseOver={handleMove}
       onMouseOut={hideTooltip}
     >
-      <g className={styles.rect}>
+      <g>
         <rect
-          className={styles.rect}
+          className={`${styles.rect} ${gray ? styles.gray : ""}`}
           width={progress * width}
           height={VECTOR_LINE_HEIGHT}
           fill={fill}
