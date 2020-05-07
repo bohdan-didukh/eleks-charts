@@ -1,12 +1,14 @@
 import React from "react";
 
 import styles from "./Tooltip.module.css";
+import { TooltipPositionType } from "./Tooltip";
 
 interface ITooltipComponent {
   visible: boolean;
   top?: number;
   left?: number;
   children?: React.ReactNode;
+  position: TooltipPositionType;
 }
 export const TooltipComponent: React.FC<ITooltipComponent> = ({
   visible,
@@ -16,7 +18,9 @@ export const TooltipComponent: React.FC<ITooltipComponent> = ({
 }) => {
   return (
     <div
-      className={`${styles.tooltip} ${visible ? styles.visible : ""}`}
+      className={`${styles.tooltip} ${visible ? styles.visible : ""} ${
+        visible ? styles.visible : ""
+      }`}
       style={{ top, left: left + 20 }}
     >
       <div className={styles.body}>{children}</div>

@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { DonutItem, VECTOR_LINE_HEIGHT } from "../../constants";
 import styles from "./VectorItem.module.scss";
 import { format0, wrap } from "../../utils";
-import { Tooltip, TooltipTypes } from "../../Tooltip";
+import { Tooltip, TooltipPosition, TooltipTypes } from "../../Tooltip";
 import { IDonutTooltip } from "../../DonutTooltip";
 
 export interface VectorItemProps {
@@ -22,6 +22,7 @@ function showTooltip(data: IDonutTooltip) {
     visible: true,
     type: TooltipTypes.donut,
     data,
+    position: TooltipPosition.bottom,
   });
 }
 

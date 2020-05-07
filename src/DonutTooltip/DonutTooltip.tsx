@@ -1,19 +1,18 @@
 import React from "react";
-import { GRAY } from "../constants";
 
 import styles from "./DonutTooltip.module.css";
 
 export interface IDonutTooltip {
-  color?: string;
-  title?: string;
-  percent?: string;
-  value?: number;
+  color: string;
+  title: string;
+  percent: string;
+  value: number;
 }
 export const DonutTooltip: React.FC<IDonutTooltip> = ({
-  color = GRAY,
-  title = "Default title",
-  percent = 25,
-  value = 25,
+  color,
+  title,
+  percent,
+  value,
 }) => {
   return (
     <div className={styles.tooltip}>

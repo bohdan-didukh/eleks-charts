@@ -26,7 +26,7 @@ export class Tooltip {
   private visible: boolean = false;
   private top: number = 0;
   private left: number = 0;
-  private position: TooltipPositionType = TooltipPosition.bottom;
+  private position: TooltipPositionType = TooltipPosition.right;
   private type: TooltipType = TooltipTypes.donut;
   private data?: IDonutTooltip | BarTooltipProps;
 
@@ -81,7 +81,7 @@ export class Tooltip {
     visible = this.visible,
     top = this.top,
     left = this.left,
-    position = this.position,
+    position = TooltipPosition.right,
     type = this.type,
     data = this.data,
   }) => {
