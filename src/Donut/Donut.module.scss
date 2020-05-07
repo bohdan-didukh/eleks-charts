@@ -1,11 +1,11 @@
-.block {
-  text-align: center;
-}
-
 .piece {
   cursor: pointer;
 }
 
+.svg {
+  position: relative;
+  left: -20px;
+}
 .donut {
   pointer-events: all;
 }

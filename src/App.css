@@ -5,6 +5,7 @@
   --color-base: #010202;
   --color-bg: #ffffff;
   --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-eleks: #0045cf;
 
   /*transition*/
   --speed: 0.25s;
@@ -21,7 +22,7 @@
   --orange-light: #f4a16b;
 
   /*sizes*/
-  --padding: 4rem;
+  --padding: 3rem;
   --circle: 1rem;
   --width: 1024px;
 }
@@ -52,9 +53,4 @@ section {
 main {
   width: var(--width);
   margin: 0 auto;
-}
-
-.charts {
-  display: flex;
-  justify-content: space-evenly;
 }

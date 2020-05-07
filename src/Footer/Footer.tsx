@@ -10,14 +10,16 @@ export const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <main>
         <div>Version 2</div>
-        <Title
-          title="EIB total lending in Romania by sector"
-          yearStart={2013}
-          yearEnd={2017}
-          details="In billions of euro"
-          white
-        />
-        <VectorChart data={DONUT_DATA} />
+        <section>
+          <Title
+            title="EIB total lending in Romania by sector"
+            yearStart={2013}
+            yearEnd={2017}
+            details="In billions of euro"
+            white
+          />
+          <VectorChart data={DONUT_DATA} />
+        </section>
       </main>
     </footer>
   );

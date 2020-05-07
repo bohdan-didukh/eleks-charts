@@ -12,7 +12,7 @@ export const Donut: React.FC = () => {
   });
 
   return (
-    <section className={styles.block}>
+    <section>
       <Title
         title="EIB total lending in Romania by sector"
         yearStart={2013}
