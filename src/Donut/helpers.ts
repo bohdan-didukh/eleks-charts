@@ -1,4 +1,4 @@
-import { SPEED_DOUBLE } from "../constants";
+import { SPEED_DOUBLE, SPEED_QUAD } from "../constants";
 
 export function polarToCartesian(
   centerX: number,
@@ -55,15 +55,42 @@ export function animateCircle(draw: (angle: number) => void) {
       }
 
       const progress = timestamp - start;
-      let angle = (() => {
-        const value = (progress / SPEED_DOUBLE) * 359;
-        return value > 359 ? 359 : value;
-      })();
-      draw(angle);
+      const percent = progress / SPEED_DOUBLE;
 
       if (progress < SPEED_DOUBLE) {
+        draw(percent * 359);
         requestAnimationFrame(animate);
       } else {
+        draw(359);
+        requestAnimationFrame(resolve);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  });
+}
+
+/**
+ * animate circle like a loading
+ * @param animatePercent
+ */
+export function animatePercents(animatePercent: (percent: number) => void) {
+  return new Promise((resolve) => {
+    let start: number | null = null;
+
+    const animate = (timestamp: number) => {
+      if (!start) {
+        start = timestamp;
+      }
+
+      const progress = timestamp - start;
+      const percent = progress / SPEED_QUAD;
+
+      if (progress < SPEED_QUAD) {
+        animatePercent(percent);
+        requestAnimationFrame(animate);
+      } else {
+        animatePercent(1);
         requestAnimationFrame(resolve);
       }
     };

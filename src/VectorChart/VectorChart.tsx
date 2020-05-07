@@ -6,6 +6,7 @@ import styles from "./Vector.module.scss";
 import { DONUT_COLOR_SET, DonutItem } from "../constants";
 import { VectorItem } from "./VectorItem";
 import { format } from "../utils";
+import { calcItemProgress } from "../utils/helpers";
 
 export interface VectorChartProps {
   data: DonutItem[];
@@ -60,17 +61,12 @@ export const VectorChart: React.FC<VectorChartProps> = ({ data }) => {
           const startPercent = endPercent;
           endPercent += percent;
 
-          const itemProgress = (() => {
-            if (progress < startPercent) {
-              return 0;
-            }
-            if (progress > startPercent && progress < endPercent) {
-              // percent = 100 %
-              // progress - start percent - x%
-              return (progress - startPercent) / percent;
-            }
-            return 1;
-          })();
+          const itemProgress = calcItemProgress({
+            progress,
+            startPercent,
+            endPercent,
+            percent,
+          });
 
           return (
             <VectorItem

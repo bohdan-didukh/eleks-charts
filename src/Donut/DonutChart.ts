@@ -16,14 +16,13 @@ import {
   LOADER_RADIUS,
   LOADER_STROKE_WIDTH,
   OUTER_RADIUS,
-  SPEED_DOUBLE,
-  SPEED_QUAD,
 } from "../constants";
 
 import styles from "./Donut.module.scss";
-import { wrap } from "../utils";
+import { format, format0, wrap } from "../utils";
 import { Tooltip, TooltipTypes } from "../Tooltip";
-import { animateCircle, describeArc } from "./helpers";
+import { animateCircle, animatePercents, describeArc } from "./helpers";
+import { calcItemProgress } from "../utils/helpers";
 
 export class DonutChart {
   private readonly element: SVGSVGElement | null = null;
@@ -54,11 +53,7 @@ export class DonutChart {
   }
 
   get total(): number {
-    return (
-      Math.round(
-        DONUT_DATA.reduce((total, { value }) => total + value, 0) * 10
-      ) / 10
-    );
+    return DONUT_DATA.reduce((total, { value }) => total + value, 0);
   }
 
   colorScale = d3.scaleOrdinal().range(DONUT_COLOR_SET);
@@ -121,9 +116,9 @@ export class DonutChart {
   drawTotal = () =>
     this.g
       ?.append("g")
-      .attr("class", styles.total)
+      .attr("class", `${styles.total} ${styles.hidden}`)
       .append("text")
-      .text(`EUR ${this.total} billion signed in total`)
+      .text(`EUR ${format(this.total)} billion signed in total`)
       .call(wrap, 140);
 
   drawLines = () => {
@@ -131,7 +126,7 @@ export class DonutChart {
     const { arc } = this;
     this.pieces
       ?.append("line")
-      .attr("class", styles.line)
+      .attr("class", `${styles.line} ${styles.hidden}`)
       .attr("x1", (d) => {
         // @ts-ignore
         return arc.centroid(d)[0] * 1.24;
@@ -156,7 +151,7 @@ export class DonutChart {
 
     this.pieces
       ?.append("g")
-      .attr("class", styles.title)
+      .attr("class", `${styles.title} ${styles.hidden}`)
       .append("text")
       .attr("width", 150)
       .attr("x", (d) => {
@@ -167,6 +162,7 @@ export class DonutChart {
       .attr("y", (d) => {
         // @ts-ignore
         let [x, y] = arc.centroid(d);
+        y += 3;
         if (Math.abs(x) < INNER_RADIUS / 2) {
           y += 5;
         }
@@ -204,8 +200,9 @@ export class DonutChart {
       .attr("y", (d) => {
         // @ts-ignore
         let [x, y] = arc.centroid(d);
+        y += 5;
         if (Math.abs(x) < INNER_RADIUS / 2) {
-          y += 8;
+          y += 5;
         }
         return y * DONUT_LABEL_RATIO - 10;
       })
@@ -265,21 +262,53 @@ export class DonutChart {
     if (node) {
       node.classList.add(styles.hidden);
 
-      setTimeout(async () => {
-        await animateCircle(this.drawLoader);
-        node.classList.add(styles.showPieces);
-
-        setTimeout(() => {
-          node.classList.add(styles.delay);
+      requestAnimationFrame(() => {
+        animateCircle(this.drawLoader).then(() => {
+          d3.selectAll(`.${styles.total}`).attr("class", styles.total);
+          node.classList.add(styles.showPieces);
+        });
+        animatePercents(this.animatePercents).then(() => {
           node.classList.remove(styles.hidden);
-
-          setTimeout(() => {
-            node.classList.remove(styles.delay);
-          }, SPEED_QUAD);
-        }, SPEED_DOUBLE);
-      }, 0);
+        });
+      });
     }
   }
+
+  /**
+   *
+   * @param progress is from 0 to 1
+   */
+  animatePercents = (progress: number) => {
+    const total = this.total;
+    let endPercent = 0;
+
+    d3.selectAll(`.${styles.value} tspan`)
+      // @ts-ignore
+      .text(({ value }, index) => {
+        const percent = Math.round((value / total) * 100) / 100;
+        const startPercent = endPercent;
+        endPercent += percent;
+
+        const itemProgress = calcItemProgress({
+          progress,
+          startPercent,
+          endPercent,
+          percent,
+        });
+
+        // d3.select(node[index]).attr("opacity", itemProgress);
+        if (this.pieces) {
+          const node = d3.select(this.pieces.nodes()[index]);
+          if (itemProgress === 1) {
+            node.select(`.${styles.title}`).attr("class", styles.title);
+            node.select(`.${styles.line}`).attr("class", styles.line);
+          }
+          node.select(`.${styles.value}`).attr("opacity", itemProgress);
+        }
+
+        return `${format0(itemProgress * this.percent(value))}%`;
+      });
+  };
 
   render() {
     const { element } = this;
