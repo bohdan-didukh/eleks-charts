@@ -1,14 +1,17 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import "./App.css";
 import { Donut } from "./Donut";
 import { VerticalBar } from "./VerticalBar";
 import { Footer } from "./Footer";
 import { Eleks } from "./Eleks";
 import { Details } from "./Details";
+import { Navigation } from "./Navigation/Navigation";
 
 function App() {
   return (
-    <div>
+    <Router>
       <header>
         <main>
           <Eleks />
@@ -16,13 +19,24 @@ function App() {
       </header>
       <main>
         <Details />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Donut />
-          <VerticalBar />
-        </div>
+        <Navigation />
       </main>
-      <Footer />
-    </div>
+      <Switch>
+        <Route path="/" exact>
+          <>
+            <main>
+              <Donut />
+            </main>
+            <Footer />
+          </>
+        </Route>
+        <Route path="/bar" exact>
+          <main>
+            <VerticalBar />
+          </main>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

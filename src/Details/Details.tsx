@@ -12,9 +12,6 @@ export const Details = () => {
       <div className={styles.title}>
         Animated infographics based on the brochure ‘Bank’s activity in
         Romania’:
-        <br />
-        ‘EIB total lending in Romania by sector (2013-2017)' and ‘Co-financed
-        Structural Programme Loans (2013-2017)’
       </div>
     </>
   );
