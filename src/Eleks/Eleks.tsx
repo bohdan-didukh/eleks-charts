@@ -11,7 +11,13 @@ export const Eleks = () => {
   }, []);
 
   return (
-    <a href="//eleks.com" target="blank" className={`eleks ${black}`}>
+    <a
+      href="//eleks.com"
+      target="blank"
+      rel="noopener noreferrer"
+      className={`eleks ${black}`}
+      title="Eleks website"
+    >
       <svg
         className="header__logo__img"
         xmlns="http://www.w3.org/2000/svg"
