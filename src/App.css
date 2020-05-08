@@ -35,7 +35,7 @@ html {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: calc(var(--width) + 200px);
+  min-width: var(--width);
 }
 
 code {
