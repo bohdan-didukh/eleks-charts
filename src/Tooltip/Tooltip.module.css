@@ -25,6 +25,11 @@
   z-index: 1;
 }
 
+.tooltip.left::before {
+  left: auto;
+  right: -0.5rem;
+}
+
 .body {
   z-index: 2;
   background: var(--color-bg);

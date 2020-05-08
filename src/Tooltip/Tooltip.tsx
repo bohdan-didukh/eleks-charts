@@ -81,7 +81,7 @@ export class Tooltip {
     visible = this.visible,
     top = this.top,
     left = this.left,
-    position = TooltipPosition.right,
+    position = this.position,
     type = this.type,
     data = this.data,
   }) => {
@@ -92,7 +92,11 @@ export class Tooltip {
 
 const handleMove = ({ pageX: left, pageY: top }: MouseEvent) => {
   const tooltip = new Tooltip();
-  tooltip.set({ top, left });
+  let position = TooltipPosition.right;
+  if (window.innerWidth - left < 300) {
+    position = TooltipPosition.left;
+  }
+  tooltip.set({ top, left, position });
 };
 
 document.body.addEventListener("mousemove", handleMove);

@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Tooltip.module.css";
-import { TooltipPositionType } from "./Tooltip";
+import { TooltipPosition, TooltipPositionType } from "./Tooltip";
 
 interface ITooltipComponent {
   visible: boolean;
@@ -15,13 +15,17 @@ export const TooltipComponent: React.FC<ITooltipComponent> = ({
   top = 0,
   left = 0,
   children = null,
+  position,
 }) => {
   return (
     <div
-      className={`${styles.tooltip} ${visible ? styles.visible : ""} ${
-        visible ? styles.visible : ""
+      className={`${styles.tooltip} ${visible ? styles.visible : ""}  ${
+        styles[position]
       }`}
-      style={{ top, left: left + 20 }}
+      style={{
+        top,
+        left: position === TooltipPosition.left ? left - 240 : left + 40,
+      }}
     >
       <div className={styles.body}>{children}</div>
     </div>
