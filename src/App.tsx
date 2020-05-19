@@ -1,25 +1,42 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import "./App.css";
 import { Donut } from "./Donut";
-import { Tooltip } from "./Tooltip";
 import { VerticalBar } from "./VerticalBar";
-const handleMove = ({
-  pageX: left,
-  pageY: top,
-}: React.MouseEvent<HTMLDivElement>) => {
-  const tooltip = new Tooltip();
-  tooltip.set({ top, left });
-};
+import { Footer } from "./Footer";
+import { Eleks } from "./Eleks";
+import { Details } from "./Details";
+import { Navigation } from "./Navigation/Navigation";
+
 function App() {
   return (
-    <div className="App" onMouseMove={handleMove}>
+    <Router>
+      <header>
+        <main>
+          <Eleks />
+        </main>
+      </header>
       <main>
-        <div className="charts">
-          <Donut />
-          <VerticalBar />
-        </div>
+        <Details />
+        <Navigation />
       </main>
-    </div>
+      <Switch>
+        <Route path="/" exact>
+          <>
+            <main>
+              <Donut />
+            </main>
+            <Footer />
+          </>
+        </Route>
+        <Route path="/bar" exact>
+          <main>
+            <VerticalBar />
+          </main>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

@@ -1,11 +1,12 @@
-.block {
-  text-align: center;
-}
-
 .piece {
   cursor: pointer;
 }
 
+.svg {
+  position: relative;
+  left: -1.5rem;
+  top: -1.5rem;
+}
 .donut {
   pointer-events: all;
 }
@@ -18,31 +19,46 @@
 .total {
   text-anchor: middle;
   display: block;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   align-items: center;
-  transition: all var(--speed);
+  transition: all var(--speed-double);
+
+  &.hidden {
+    opacity: 0;
+    transform: scale(0.5);
+  }
 }
 
 .line {
-  fill: currentColor;
-  stroke: currentColor;
+  stroke: var(--gray);
+  transition: all var(--speed-double);
+
+  &.hidden {
+    transform: scale(0.8);
+    opacity: 0;
+  }
 }
 
 .title {
   font-size: 1.4rem;
   line-height: 1.4em;
+  transition: all var(--speed-double);
+
+  &.hidden {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
 }
 
 .value {
   font-size: 1.7rem;
   font-weight: bold;
   line-height: 1.2em;
-}
+  transition: opacity var(--speed);
 
-.line,
-.title,
-.value {
-  transition: all var(--speed);
+  &.hidden {
+    opacity: 0;
+  }
 }
 
 .loader {
@@ -56,31 +72,11 @@
 
 /*animation*/
 .hidden {
-  & .total,
-  & .line,
-  & .title,
-  & .value {
-    opacity: 0;
-    visibility: hidden;
-    transition: none;
-  }
-
-  & .title,
-  & .value,
-  & .line {
-    transform: scale(0.8);
-  }
-
   & .loader {
     transform: scale(0.7);
     transition: transform var(--speed-double);
     opacity: 1;
     visibility: visible;
-  }
-
-  & .total {
-    opacity: 0;
-    transform: scale(0.5);
   }
 
   & .piecePath {
@@ -97,17 +93,6 @@
     opacity: 1;
     visibility: visible;
     animation: circle-in var(--speed-double) ease-in-out;
-  }
-}
-
-// delay
-@for $i from 1 through 8 {
-  .delay .piece:nth-child(#{$i}) {
-    & .line,
-    & .value,
-    & .title {
-      transition-delay: calc(var(--delay-diff) * #{$i});
-    }
   }
 }
 

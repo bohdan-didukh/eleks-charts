@@ -12,7 +12,7 @@ export const Line: React.FC<LineProps> = ({ x1, x2, y1, y2 }) => {
   const [hidden, setHidden] = useState<boolean>(true);
 
   useEffect(() => {
-    setTimeout(() => setHidden(false), 0);
+    requestAnimationFrame(() => setHidden(false));
   }, []);
 
   return (

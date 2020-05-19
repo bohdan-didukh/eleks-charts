@@ -30,12 +30,12 @@ export const DONUT_DATA: DonutItem[] = [
     value: 0.47,
   },
   {
-    title: "School rehabilitation",
-    value: 0.14,
-  },
-  {
     title: "Other",
     value: 0.28,
+  },
+  {
+    title: "School rehabilitation",
+    value: 0.14,
   },
 ];
 
@@ -50,7 +50,7 @@ export const DONUT_COLOR_SET: string[] = [
 
 export const OUTER_RADIUS = 103;
 export const INNER_RADIUS = 71;
-export const DONUT_PADDING = 180;
+export const DONUT_PADDING = 150;
 export const DONUT_WIDTH = OUTER_RADIUS * 2 + DONUT_PADDING * 2;
 export const DONUT_HEIGHT = OUTER_RADIUS * 2 + DONUT_PADDING;
 

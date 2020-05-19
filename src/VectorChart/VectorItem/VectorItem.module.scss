@@ -1,0 +1,37 @@
+.percent {
+  font-size: 1.7rem;
+  font-weight: bold;
+  fill: var(--color-bg);
+}
+
+.title {
+  fill: var(--color-bg);
+  font-size: 1.4rem;
+}
+
+.titleG {
+  transition: transform var(--speed), opacity var(--speed);
+  will-change: transform, opacity;
+
+  &.hidden {
+    transform: translateX(-1rem);
+    opacity: 0;
+  }
+}
+
+.rect {
+  transition: transform var(--speed), fill var(--speed-double);
+
+  &.gray {
+    fill: var(--gray) !important;
+  }
+}
+
+.item {
+  pointer-events: bounding-box;
+  cursor: pointer;
+
+  &:hover .rect {
+    transform: scale(1, 1.3) translate(0, -1.6px);
+  }
+}

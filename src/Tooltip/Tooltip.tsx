@@ -26,7 +26,7 @@ export class Tooltip {
   private visible: boolean = false;
   private top: number = 0;
   private left: number = 0;
-  private position: TooltipPositionType = TooltipPosition.bottom;
+  private position: TooltipPositionType = TooltipPosition.right;
   private type: TooltipType = TooltipTypes.donut;
   private data?: IDonutTooltip | BarTooltipProps;
 
@@ -89,3 +89,14 @@ export class Tooltip {
     this.render();
   };
 }
+
+const handleMove = ({ pageX: left, pageY: top }: MouseEvent) => {
+  const tooltip = new Tooltip();
+  let position = TooltipPosition.right;
+  if (window.innerWidth - left < 300) {
+    position = TooltipPosition.left;
+  }
+  tooltip.set({ top, left, position });
+};
+
+document.body.addEventListener("mousemove", handleMove);

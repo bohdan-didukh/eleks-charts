@@ -5,6 +5,7 @@
   --color-base: #010202;
   --color-bg: #ffffff;
   --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-eleks: #0045cf;
 
   /*transition*/
   --speed: 0.25s;
@@ -21,8 +22,9 @@
   --orange-light: #f4a16b;
 
   /*sizes*/
-  --padding: 7rem;
+  --padding: 3rem;
   --circle: 1rem;
+  --width: 1024px;
 }
 
 body,
@@ -33,6 +35,7 @@ html {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: var(--width);
 }
 
 code {
@@ -44,18 +47,11 @@ h2 {
   font-size: 2.4rem;
 }
 
-.App {
-  text-align: center;
-}
-
 section {
   padding: var(--padding) 0;
 }
 
 main {
-}
-
-.charts {
-  display: flex;
-  justify-content: space-evenly;
+  width: var(--width);
+  margin: 0 auto;
 }

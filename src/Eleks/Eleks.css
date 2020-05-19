@@ -1,0 +1,32 @@
+.eleks {
+  margin-top: 5rem;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.eleks::after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: var(--color-eleks);
+  transform: translateX(-100%);
+  transition: transform var(--speed);
+}
+
+.eleks:hover::after {
+  transform: translateX(0);
+}
+
+.eleks.black svg {
+  fill: var(--color-base);
+}
+
+.eleks svg {
+  fill: var(--color-eleks);
+  transition: fill var(--speed-double);
+}
