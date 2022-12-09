@@ -1874,10 +1874,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@snyk/protect@^1.1022.0":
-  version "1.1022.0"
-  resolved "https://registry.yarnpkg.com/@snyk/protect/-/protect-1.1022.0.tgz#2d5e480b02ed62f372acd4a97a078b5607a1147e"
-  integrity sha512-ASix6hXE9b3lgWovJjpxkx6W57pyqsB67ISxQIomLUd+XHeDodnhM3nsHJwQj8hVRWZwoHoYmnZKy9DgUg0q8w==
+"@snyk/protect@latest":
+  version "1.1069.0"
+  resolved "https://registry.yarnpkg.com/@snyk/protect/-/protect-1.1069.0.tgz#8427b3f6481128a7d765ee5963cc5ca31f35a772"
+  integrity sha512-LowUeB/+tyEoCwriA/+RkZUIolZcXVVcid5mkFtTpM/lZUVmPNt7gpNHExBPc4l1gzJu21uUjBxG5mf5R+ScmQ==
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
@@ -4672,9 +4672,9 @@ decimal.js@^10.2.1:
   integrity sha512-F29o+vci4DodHYT9UrR5IEbfBw9pE5eSapIJdTqXK5+6hq+t8VRxwQyKlW2i+KDKFkkJQRvFyI/QXD83h8LyQw==
 
 decode-uri-component@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
-  integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
+  integrity sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==
 
 dedent@^0.7.0:
   version "0.7.0"
